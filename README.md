@@ -5,7 +5,7 @@
 [Mehref]:https://github.com/StarshipladDev
 ![This is Alt text][Screenshot]
 
-This application is a collaborative project between ![Kevin][Kevinhref] and [myself][Mehref]
+This application is a collaborative project between [Kevin][Kevinhref] and [myself][Mehref]
 We plan on implementing a turn-based video game where all actions are declared before events occur, meaning all player's 
 units will act simultaneously. 
 The project will be updated in branches, and merged into master when agreed-upon implementations are realized.
