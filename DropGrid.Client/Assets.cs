@@ -6,8 +6,15 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Text;
 
+/// <summary>
+/// Classes in this namespace deal with the loading and manipulation of in-game assets.
+/// These can be sprites, spritesheets, audio etc.
+/// </summary>
 namespace DropGrid.Client.Assets
 {
+    /// <summary>
+    /// Manages the assets that are yet to be loaded.
+    /// </summary>
     class AssetLoader
     {
         private GameEngine _engine;
@@ -50,6 +57,14 @@ namespace DropGrid.Client.Assets
         }
     }
 
+    /// <summary>
+    /// This is the primary way the game loads and handles content. 
+    /// 
+    /// Each Asset is a wrapper around a specific data type. This type of implementation
+    /// allows deferred / lazy resource loading.
+    /// 
+    /// TODO: Generify this class. Casting Objects is a bit disgusting.
+    /// </summary>
     public abstract class Asset
     {
         public string Identifier { get; }
@@ -66,6 +81,10 @@ namespace DropGrid.Client.Assets
         public bool IsLoaded() => GetData() != null;
     }
 
+    /// <summary>
+    /// Provides functionalities to load and handle image data in a spritesheet.
+    /// Once an image is loaded, it is sliced into cells of specified dimensions.
+    /// </summary>
     public class Spritesheet : Asset
     {
         private int _cellWidth, _cellHeight;
@@ -112,6 +131,13 @@ namespace DropGrid.Client.Assets
             return _sprites;
         }
 
+        /// <summary>
+        /// This is the preferred way to work with spritesheets. There should be no reason
+        /// to invoke GetData() here.
+        /// </summary>
+        /// <param name="cellX">The X co-ordinate of the sprite cell.</param>
+        /// <param name="cellY">The Y co-ordinate of the sprite cell.</param>
+        /// <returns></returns>
         public Sprite getSpriteAt(int cellX, int cellY)
         {
             return _sprites[cellX + cellY * _cellColumns];
