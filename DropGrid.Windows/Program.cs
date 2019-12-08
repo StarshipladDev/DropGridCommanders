@@ -1,5 +1,5 @@
 ﻿using System;
-using DropGrid;
+using DropGrid.Client;
 
 namespace DropGrid.Windows
 {
@@ -15,8 +15,8 @@ namespace DropGrid.Windows
         [STAThread]
         static void Main()
         {
-            //using (var game = new GameEngine())
-            //    game.Run();
+            using (var game = new GameEngine())
+                game.Run();
         }
     }
 #endif
