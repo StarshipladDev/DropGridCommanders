@@ -1,5 +1,6 @@
 ﻿#region Using Statements
 using AppKit;
+using DropGrid.Client;
 #endregion
 
 namespace DropGrid.MacOS
