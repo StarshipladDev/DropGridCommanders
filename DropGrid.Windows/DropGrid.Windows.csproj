@@ -41,7 +41,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,7 +55,6 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
   </ItemGroup>
   <Import Project="..\DropGrid\DropGrid.projitems" Label="Shared" />

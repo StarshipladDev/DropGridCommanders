@@ -9,7 +9,7 @@
     <Import_RootNamespace>DropGrid</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />

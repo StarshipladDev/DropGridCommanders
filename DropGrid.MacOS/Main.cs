@@ -1,25 +1,17 @@
 ﻿#region Using Statements
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using AppKit;
-using Foundation;
 #endregion
 
-namespace DropGrid.MacOS.MacOS
+namespace DropGrid.MacOS
 {
 	static class Program
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
 		static void Main(string[] args)
 		{
-			NSApplication.Init ();
+			NSApplication.Init();
 
-			using (var game = new Game1 ()) {
-			game.Run ();
+			using (var game = new GameEngine()) {
+			    game.Run();
 			}
 		}
 	}
