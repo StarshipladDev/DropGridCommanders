@@ -10,15 +10,25 @@ using Microsoft.Xna.Framework.Input;
 
 namespace DropGrid.Client
 {
-    
+    /// <summary>
+    /// This is the main client engine code. 
+    /// It is responsible for initializing, drawing and updating the game state.
+    /// </summary>
     public class GameEngine : Game
     {
+        // For drawing objects.
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Dictionary<StateId, GameState> _gameStates;
-        private GameState _currentState;
         private GraphicsRenderer _renderer;
 
+        // For game state management.
+        private Dictionary<StateId, GameState> _gameStates;
+        private GameState _currentState;
+        
+        /// <summary>
+        /// Sets up internal objects to manage the game loop.
+        /// Do not load game assets here.
+        /// </summary>
         public GameEngine()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -27,10 +37,10 @@ namespace DropGrid.Client
         }
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
+        /// Sets up the game states and other core elements of the game loop.
+        /// Asset loading is done in InitialisationState.
+        /// 
+        /// Do not load assets here.
         /// </summary>
         protected override void Initialize()
         {
@@ -53,7 +63,10 @@ namespace DropGrid.Client
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _renderer = new GraphicsRenderer(_graphics, GraphicsDevice, _spriteBatch);
 
-            //TODO: use this.Content to load your game content here 
+            foreach (GameState registeredState in _gameStates.Values)
+            {
+                registeredState.LoadContent();
+            }
         }
 
         /// <summary>
@@ -90,7 +103,6 @@ namespace DropGrid.Client
         /// <summary>
         /// Adds a game state instance to the game state map.
         /// </summary>
-        /// <param name="id">The state identifier.</param>
         /// <param name="state">The state instance.</param>
         private void RegisterGameState(GameState state)
         {
@@ -100,23 +112,32 @@ namespace DropGrid.Client
             _gameStates.Add(id, state);
         }
 
+        /// <summary>
+        /// Transition into the specified state.
+        /// </summary>
+        /// <param name="id">StateId of the new state.</param>
         public void EnterState(StateId id)
         {
             GameState state = _gameStates[id];
             if (state == null)
                 throw new InvalidOperationException("Attempting to switch to state id '" + state.ToString() + "' which has a null state instance!");
             if (_currentState != null)
-                _currentState.onExit();
+                _currentState.OnExit();
             _currentState = state;
-            _currentState.onEnter();
+            _currentState.OnEnter();
         }
     }
 
+    /// <summary>
+    /// This is mainly a wrapper around SpriteBatch with extra utilities.
+    /// The SpriteBatch field is still accessible through GraphicsRenderer.SpriteBatch.
+    /// </summary>
     class GraphicsRenderer
     {
         private GraphicsDeviceManager _graphicsDeviceManager;
         private GraphicsDevice _graphicsDevice;
         private SpriteBatch _spriteBatch;
+        private Texture2D _empty;
         public SpriteBatch SpriteBatch { get { return _spriteBatch; } }
 
         public GraphicsRenderer(GraphicsDeviceManager graphicsDeviceManager, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
@@ -126,41 +147,60 @@ namespace DropGrid.Client
             this._spriteBatch = spriteBatch;
         }
 
-        private Texture2D CreateSampleTexture(GraphicsDevice graphics, Color color)
+        /// <summary>
+        /// Used internally. Creates a 1x1 empty texture filled with solid color.
+        /// </summary>
+        /// <param name="graphics">The graphics device from which to generate the texture from.</param>
+        /// <param name="color">The color object.</param>
+        /// <returns></returns>
+        private void CreateEmptyTexture(GraphicsDevice graphics, Color color)
         {
-            Texture2D texture = new Texture2D(graphics, 1, 1, false, SurfaceFormat.Color);
-            texture.SetData<Color>(new Color[] { color });
-            return texture;
+            _empty = new Texture2D(graphics, 1, 1, false, SurfaceFormat.Color);
+            _empty.SetData<Color>(new Color[] { color });
         }
 
+        /// <summary>
+        /// XNA does not treat the drawable region as a canvas with applicable 'draw utilities'. Instead, everything is a 
+        /// texture to be drawn using SpriteBatch. This is a workaround method to implement a rudimentry drawRectangle method
+        /// Parameters are of type double to allow better precision and smoother animations (if applicable).
+        /// </summary>
+        /// <param name="x">X bound of the rectangle</param>
+        /// <param name="y">Y bound of the rectangle</param>
+        /// <param name="width">WIDTH bound of the rectangle</param>
+        /// <param name="height">HEIGHT bound of the rectangle</param>
+        /// <param name="fillColor">Fill color</param>
         public void DrawFilledRectangle(double x, double y, double width, double height, Color fillColor)
         {
-            Texture2D texture = CreateSampleTexture(_graphicsDevice, fillColor);
+            if (_empty == null)
+                CreateEmptyTexture(_graphicsDevice, fillColor);
             _spriteBatch.Begin();
-            _spriteBatch.Draw(texture, new Rectangle((int) x, (int) y, (int) width, (int) height), fillColor);
+            _spriteBatch.Draw(_empty, new Rectangle((int) x, (int) y, (int) width, (int) height), fillColor);
             _spriteBatch.End();
         }
     }
 
     namespace State
     {
+        /// <summary>
+        /// Each GameState handles one succinct set of game routines. They each have a unique identifiable state ID.
+        /// </summary>
         abstract class GameState
         {
-            public const int INITIALISE = 0;
-            public const int MENU = 1;
-            public const int GAMEPLAY = 2;
-
             public abstract StateId GetId();
 
             public abstract void Draw(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime);
+            
             public abstract void Update(GameEngine engine, GameTime gameTime);
 
-            public void onEnter() {}
-            public void onExit() {}
+            public void OnEnter() { }
+            
+            public void OnExit() { }
+
+            public void LoadContent() { }
         }
 
         /// <summary>
-        /// 
+        /// A list of supported states by the game client.
         /// </summary>
         public enum StateId
         {
@@ -169,6 +209,10 @@ namespace DropGrid.Client
             Gameplay
         }
 
+        /// <summary>
+        /// The initialisation state handles deferred content loading. It is too costly to load ALL game assets into memory during startup.
+        /// When new unloaded assets have been requested, we switch to this state and load them.
+        /// </summary>
         class InitialiseState : GameState
         {
             public override StateId GetId() => StateId.Initialise;
@@ -191,6 +235,9 @@ namespace DropGrid.Client
             }
         }
 
+        /// <summary>
+        /// Handles main menu logic.
+        /// </summary>
         class MenuState : GameState
         {
             public override StateId GetId() => StateId.Menu;
@@ -200,6 +247,9 @@ namespace DropGrid.Client
             public override void Update(GameEngine engine, GameTime gameTime) => throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The crux of the client-side game logic belongs here.
+        /// </summary>
         class GameplayState : GameState
         {
             public override StateId GetId() => StateId.Gameplay;
