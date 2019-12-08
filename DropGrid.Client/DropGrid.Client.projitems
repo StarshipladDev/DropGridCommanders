@@ -6,9 +6,10 @@
     <SharedGUID>6fda47c6-2f42-42c7-9543-6b36162946ae</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>DropGrid</Import_RootNamespace>
+    <Import_RootNamespace>DropGrid.Client</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Assets.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ClientCore.cs" />
   </ItemGroup>
   <ItemGroup>
