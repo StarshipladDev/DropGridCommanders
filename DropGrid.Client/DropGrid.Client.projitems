@@ -9,11 +9,16 @@
     <Import_RootNamespace>DropGrid.Client</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Assets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\Asset.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetBundle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ClientCore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\Sprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\Spritesheet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Asset\" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />

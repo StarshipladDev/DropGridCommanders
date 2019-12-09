@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropGrid.Windows", "DropGri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropGrid.MacOS", "DropGrid.MacOS\DropGrid.MacOS.csproj", "{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "DropGrid.Core", "DropGrid.Core\DropGrid.Core.vcxitems", "{BAD80A74-C3D8-439E-917F-10C6AECA559B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DropGrid.Core", "DropGrid.Core\DropGrid.Core.vcxitems", "{99FE52F5-46DD-4AB2-85AC-F882B2778A2F}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DropGrid.Client", "DropGrid.Client\DropGrid.Client.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
 EndProject

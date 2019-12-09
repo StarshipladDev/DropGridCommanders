@@ -1,7 +1,7 @@
 ﻿#region Using Statements
 using System;
 using System.Collections.Generic;
-using DropGrid.Client.Assets;
+using DropGrid.Client.Asset;
 using DropGrid.Client.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -206,7 +206,7 @@ namespace DropGrid.Client
                     AssetLoader.LoadQueue.Add(smiley);
                     AssetLoader.LoadQueue.Add(tileset);
 
-                    AssetLoader.LoadQueue.LoadAllAssetsInQueue();
+                    AssetLoader.LoadQueue.LoadAll();
                     loaded = true;
                 }
                 spriteBatch.Begin();
