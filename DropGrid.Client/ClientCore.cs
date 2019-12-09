@@ -47,7 +47,7 @@ namespace DropGrid.Client
         {
             IsMouseVisible = true;
 
-            RegisterGameState(new InitialiseState());
+            RegisterGameState(new LoadingState());
             RegisterGameState(new MenuState());
             RegisterGameState(new GameplayState());
 
@@ -156,7 +156,7 @@ namespace DropGrid.Client
         /// The initialisation state handles deferred content loading. It is too costly to load ALL game assets into memory during startup.
         /// When new unloaded assets have been requested, we switch to this state and load them.
         /// </summary>
-        class InitialiseState : GameState
+        class LoadingState : GameState
         {
             public override StateId GetId() => StateId.Initialise;
 
@@ -203,10 +203,10 @@ namespace DropGrid.Client
             {
                 if (!loaded)
                 {
-                    AssetLoader.Instance.AddToLoadingQueue(smiley);
-                    AssetLoader.Instance.AddToLoadingQueue(tileset);
+                    AssetLoader.LoadQueue.Add(smiley);
+                    AssetLoader.LoadQueue.Add(tileset);
 
-                    AssetLoader.Instance.LoadAllAssetsInQueue();
+                    AssetLoader.LoadQueue.LoadAllAssetsInQueue();
                     loaded = true;
                 }
                 spriteBatch.Begin();
