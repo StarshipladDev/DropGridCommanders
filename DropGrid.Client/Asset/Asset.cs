@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DropGrid.Client.Asset
 {
@@ -20,8 +18,6 @@ namespace DropGrid.Client.Asset
         public Asset(string identifier)
         {
             Identifier = identifier;
-
-            AssetLoader.Register(this);
         }
 
         public abstract Asset Load(ContentManager contentManager);

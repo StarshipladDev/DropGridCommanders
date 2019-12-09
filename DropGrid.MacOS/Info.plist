@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>project.MonoGame.DropGrid.MacOS.MacOS</string>
+	<string>project.MonoGame.DropGrid.MacOS</string>
 	<key>CFBundleName</key>
 	<string>DropGrid.MacOS.MacOS</string>
 	<key>CFBundleVersion</key>
@@ -14,5 +14,7 @@
 	<string>NSApplication</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1</string>
 </dict>
 </plist>
