@@ -13,9 +13,20 @@ namespace DropGrid.Client.Asset
 
         private AssetLoader() { }
 
-        public void Add(Asset asset) => _loadQueue.Enqueue(asset);
+        public void Add(Asset asset, params Asset[] more)
+        {
+            _loadQueue.Enqueue(asset);
+            foreach (Asset assetItem in more)
+                _loadQueue.Enqueue(assetItem);
+        }
 
-        public void Clear() => _loadQueue.Clear();
+        public void Add(AssetsToUse assetsToUse)
+        {
+            foreach (Asset asset in assetsToUse.AssetDictionary.Values)
+                Add(asset);
+        }
+
+        private void Clear() => _loadQueue.Clear();
 
         public Asset LoadNext()
         {
@@ -24,8 +35,6 @@ namespace DropGrid.Client.Asset
             Asset nextItem = _loadQueue.Dequeue();
             return nextItem.IsLoaded() ? nextItem : nextItem.Load(_engine.Content);
         }
-
-        public Asset GetItemAtFront() => IsEmpty() ? null : _loadQueue.Peek();
 
         public bool IsEmpty() => _loadQueue.Count == 0;
 

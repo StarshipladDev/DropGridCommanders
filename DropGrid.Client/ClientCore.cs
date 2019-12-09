@@ -199,19 +199,19 @@ namespace DropGrid.Client
 
             // TODO: This is only temporary
             bool loaded = false;
+            AssetsToUse assetsToUse;
             public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
             {
                 if (!loaded)
                 {
-                    AssetLoader.LoadQueue.Add(smiley);
-                    AssetLoader.LoadQueue.Add(tileset);
+                    assetsToUse = new AssetsToUse().Add(new Spritesheet("basic_ground_tiles", 128));
 
+                    AssetLoader.LoadQueue.Add(assetsToUse);
                     AssetLoader.LoadQueue.LoadAll();
                     loaded = true;
                 }
                 spriteBatch.Begin();
-                spriteBatch.Draw((Texture2D) smiley.GetData(), new Vector2(20, 20));
-                spriteBatch.Draw((Texture2D) tileset.getSpriteAt(0, 0).GetData(), new Vector2(200, 200));
+                spriteBatch.Draw((Texture2D) ((Spritesheet) assetsToUse.GetAsset("basic_ground_tiles")).getSpriteAt(0, 0).GetData(), new Vector2(200, 200));
                 spriteBatch.End();
             }
 
@@ -220,8 +220,6 @@ namespace DropGrid.Client
                 
             }
 
-            Sprite smiley = new Sprite("test");
-            Spritesheet tileset = new Spritesheet("basic_ground_tiles", 128);
             
         }
     }
