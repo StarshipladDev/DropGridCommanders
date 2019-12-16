@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using System;
 using System.Collections.Generic;
+using DropGrid.Client.Asset;
 using DropGrid.Client.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,8 +20,7 @@ namespace DropGrid.Client
         // For drawing objects.
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private GraphicsRenderer _renderer;
-
+        
         // For game state management.
         private Dictionary<StateId, GameState> _gameStates;
         private GameState _currentState;
@@ -33,6 +33,7 @@ namespace DropGrid.Client
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            AssetLoader.Initialise(this);
             _gameStates = new Dictionary<StateId, GameState>();
         }
 
@@ -46,10 +47,9 @@ namespace DropGrid.Client
         {
             IsMouseVisible = true;
 
-            RegisterGameState(new InitialiseState());
+            RegisterGameState(new LoadingState());
             RegisterGameState(new MenuState());
             RegisterGameState(new GameplayState());
-            EnterState(StateId.Initialise);
 
             base.Initialize();
         }
@@ -61,12 +61,8 @@ namespace DropGrid.Client
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _renderer = new GraphicsRenderer(_graphics, GraphicsDevice, _spriteBatch);
 
-            foreach (GameState registeredState in _gameStates.Values)
-            {
-                registeredState.LoadContent();
-            }
+            EnterState(StateId.Initialise);
         }
 
         /// <summary>
@@ -96,7 +92,7 @@ namespace DropGrid.Client
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            _currentState.Draw(this, _renderer, gameTime);
+            _currentState.Draw(this, _spriteBatch, gameTime);
             base.Draw(gameTime);
         }
 
@@ -128,57 +124,6 @@ namespace DropGrid.Client
         }
     }
 
-    /// <summary>
-    /// This is mainly a wrapper around SpriteBatch with extra utilities.
-    /// The SpriteBatch field is still accessible through GraphicsRenderer.SpriteBatch.
-    /// </summary>
-    class GraphicsRenderer
-    {
-        private GraphicsDeviceManager _graphicsDeviceManager;
-        private GraphicsDevice _graphicsDevice;
-        private SpriteBatch _spriteBatch;
-        private Texture2D _empty;
-        public SpriteBatch SpriteBatch { get { return _spriteBatch; } }
-
-        public GraphicsRenderer(GraphicsDeviceManager graphicsDeviceManager, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
-        {
-            this._graphicsDeviceManager = graphicsDeviceManager;
-            this._graphicsDevice = graphicsDevice;
-            this._spriteBatch = spriteBatch;
-        }
-
-        /// <summary>
-        /// Used internally. Creates a 1x1 empty texture filled with solid color.
-        /// </summary>
-        /// <param name="graphics">The graphics device from which to generate the texture from.</param>
-        /// <param name="color">The color object.</param>
-        /// <returns></returns>
-        private void CreateEmptyTexture(GraphicsDevice graphics, Color color)
-        {
-            _empty = new Texture2D(graphics, 1, 1, false, SurfaceFormat.Color);
-            _empty.SetData<Color>(new Color[] { color });
-        }
-
-        /// <summary>
-        /// XNA does not treat the drawable region as a canvas with applicable 'draw utilities'. Instead, everything is a 
-        /// texture to be drawn using SpriteBatch. This is a workaround method to implement a rudimentry drawRectangle method
-        /// Parameters are of type double to allow better precision and smoother animations (if applicable).
-        /// </summary>
-        /// <param name="x">X bound of the rectangle</param>
-        /// <param name="y">Y bound of the rectangle</param>
-        /// <param name="width">WIDTH bound of the rectangle</param>
-        /// <param name="height">HEIGHT bound of the rectangle</param>
-        /// <param name="fillColor">Fill color</param>
-        public void DrawFilledRectangle(double x, double y, double width, double height, Color fillColor)
-        {
-            if (_empty == null)
-                CreateEmptyTexture(_graphicsDevice, fillColor);
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_empty, new Rectangle((int) x, (int) y, (int) width, (int) height), fillColor);
-            _spriteBatch.End();
-        }
-    }
-
     namespace State
     {
         /// <summary>
@@ -188,15 +133,13 @@ namespace DropGrid.Client
         {
             public abstract StateId GetId();
 
-            public abstract void Draw(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime);
+            public abstract void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime);
             
             public abstract void Update(GameEngine engine, GameTime gameTime);
 
             public void OnEnter() { }
             
             public void OnExit() { }
-
-            public void LoadContent() { }
         }
 
         /// <summary>
@@ -213,11 +156,11 @@ namespace DropGrid.Client
         /// The initialisation state handles deferred content loading. It is too costly to load ALL game assets into memory during startup.
         /// When new unloaded assets have been requested, we switch to this state and load them.
         /// </summary>
-        class InitialiseState : GameState
+        class LoadingState : GameState
         {
             public override StateId GetId() => StateId.Initialise;
 
-            public override void Draw(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
+            public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
             {
 
             }
@@ -242,7 +185,7 @@ namespace DropGrid.Client
         {
             public override StateId GetId() => StateId.Menu;
 
-            public override void Draw(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime) => throw new NotImplementedException();
+            public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime) => throw new NotImplementedException();
 
             public override void Update(GameEngine engine, GameTime gameTime) => throw new NotImplementedException();
         }
@@ -254,14 +197,30 @@ namespace DropGrid.Client
         {
             public override StateId GetId() => StateId.Gameplay;
 
-            public override void Draw(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
+            // TODO: This is only temporary
+            bool loaded = false;
+            AssetsToUse assetsToUse;
+            public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
             {
-                renderer.DrawFilledRectangle(20, 20, 200, 200, Color.White);
+                if (!loaded)
+                {
+                    assetsToUse = new AssetsToUse().Add(new Spritesheet("basic_ground_tiles", 128));
+
+                    AssetLoader.LoadQueue.Add(assetsToUse);
+                    AssetLoader.LoadQueue.LoadAll();
+                    loaded = true;
+                }
+                spriteBatch.Begin();
+                spriteBatch.Draw((Texture2D) ((Spritesheet) assetsToUse.GetAsset("basic_ground_tiles")).getSpriteAt(0, 0).GetData(), new Vector2(200, 200));
+                spriteBatch.End();
             }
 
             public override void Update(GameEngine engine, GameTime gameTime)
             {
+                
             }
+
+            
         }
     }
 }
