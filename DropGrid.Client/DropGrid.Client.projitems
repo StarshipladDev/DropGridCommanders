@@ -9,7 +9,7 @@
     <Import_RootNamespace>DropGrid</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)GameCore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ClientCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
@@ -17,4 +17,4 @@
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
- </Project>
+</Project>

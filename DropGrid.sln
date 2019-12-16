@@ -1,18 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.539
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DropGrid.Shared", "DropGrid\DropGrid.Shared.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropGrid.Windows", "DropGrid.Windows\DropGrid.Windows.csproj", "{16854144-1824-4046-858F-93977E9AABD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropGrid.MacOS", "DropGrid.MacOS\DropGrid.MacOS.csproj", "{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DropGrid.Core", "DropGrid.Core\DropGrid.Core.vcxitems", "{99FE52F5-46DD-4AB2-85AC-F882B2778A2F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DropGrid.Client", "DropGrid.Client\DropGrid.Client.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		DropGrid\DropGrid.projitems*{16854144-1824-4046-858f-93977e9aabd2}*SharedItemsImports = 4
-		DropGrid\DropGrid.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
+		DropGrid.Client\DropGrid.Client.projitems*{16854144-1824-4046-858f-93977e9aabd2}*SharedItemsImports = 4
+		DropGrid.Core\DropGrid.Core.vcxitems*{99fe52f5-46dd-4ab2-85ac-f882b2778a2f}*SharedItemsImports = 9
+		DropGrid.Client\DropGrid.Client.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
