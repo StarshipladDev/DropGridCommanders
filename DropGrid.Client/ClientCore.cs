@@ -198,6 +198,7 @@ namespace DropGrid.Client
             public override StateId GetId() => StateId.Gameplay;
 
             // TODO: This is only temporary
+            public int turn;
             bool loaded = false;
             AssetsToUse assetsToUse;
             public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
@@ -209,6 +210,7 @@ namespace DropGrid.Client
                     AssetLoader.LoadQueue.Add(assetsToUse);
                     AssetLoader.LoadQueue.LoadAll();
                     loaded = true;
+                    turn = 0;
                 }
                 spriteBatch.Begin();
                 spriteBatch.Draw((Texture2D) ((Spritesheet) assetsToUse.GetAsset("basic_ground_tiles")).getSpriteAt(0, 0).GetData(), new Vector2(200, 200));
@@ -221,6 +223,120 @@ namespace DropGrid.Client
             }
 
             
+        }
+        ///<summary>
+        ///The superclass for 'displayed' objects on the game other than the battle map <p>
+        /// Breaks down into <see cref="AbstractEntity"/> and <see cref="RealEntity"/>
+        ///</summary>
+        abstract class Entity
+        {
+            private int gridX;
+            private int gridY;
+            private String name;
+            private Texture2D attatchedSprite;
+            public void SetEntity(int gridX, int gridY, String name)
+            {
+                this.gridX = gridX;
+                this.gridY = gridY;
+                this.name = name;
+                this.attatchedSprite = null;
+            }
+            public void SetTexture(Sprite place)
+            {
+                this.attatchedSprite = (Texture2D) place.GetData();
+            }
+            public int getGridX()
+            {
+                return this.gridX;
+            }
+            public int getGridY()
+            {
+                return this.gridY;
+            }
+        }
+        abstract class RealEntity : Entity
+        {
+            private bool interactable;
+            public void SetRealEntity(int gridX, int gridY, String name, bool interactable)
+            {
+                SetEntity(gridX,gridY,name);
+                this.interactable = interactable;
+            }
+            public bool getInteractable()
+            {
+                return interactable;
+            }
+        }
+        abstract class AbstractEntity : Entity
+        {
+            int turnPlaced;
+            public void SetAbstractEntity(int gridX, int gridY, String name, int turnPlaced)
+            {
+                SetEntity(gridX, gridY, name);
+                this.turnPlaced = turnPlaced;
+            }
+            public int getturnPlaced()
+            {
+                return turnPlaced;
+            }
+        }
+        class Unit : RealEntity
+        {
+            private int health, range, sniperRange, damageNorm, damageBuilding, cost,damageAssault;
+            public Unit(String unitType,int gridX,int gridY)
+            {
+                
+                switch (unitType)
+                {
+                    case ("Infantry"):
+                        this.health = 4;
+                        this.range = 1;
+                        this.sniperRange = 0;
+                        this.damageNorm = 2;
+                        this.damageBuilding = 1;
+                        this.damageAssault = 2;
+                        this.cost = 1;
+                        break;
+                    default:
+                        this.health = 0;
+                        this.range = 0;
+                        this.sniperRange = 0;
+                        this.damageNorm = 0;
+                        this.damageBuilding = 0;
+                        this.cost = 0;
+                        this.damageAssault = 0;
+                        break;
+                }
+                SetRealEntity(gridX, gridY, unitType, true);
+            }
+        }
+        class Terrain : RealEntity
+        {
+            public Terrain(String name, int gridX, int gridY)
+            {
+                SetRealEntity(gridX, gridY, name, false);
+            }
+        }
+        class DropOrder : AbstractEntity
+        {
+            public DropOrder(String name, int gridX, int gridY, GameplayState gs)
+            {
+                SetAbstractEntity(gridX, gridY, name,gs.turn);
+            }
+        }
+        class AbilityOrder : AbstractEntity
+        {
+            public AbilityOrder(String name, int gridX, int gridY, GameplayState gs)
+            {
+                SetAbstractEntity(gridX, gridY, name, gs.turn);
+            }
+        }
+        class MoveOrder : AbstractEntity
+        {
+            public MoveOrder(String name, int gridX, int gridY, GameplayState gs)
+            {
+                SetAbstractEntity(gridX, gridY, name, gs.turn);
+            }
         }
     }
 }
