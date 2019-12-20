@@ -6,15 +6,38 @@
     <SharedGUID>6fda47c6-2f42-42c7-9543-6b36162946ae</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>DropGrid</Import_RootNamespace>
+    <Import_RootNamespace>DropGrid.Client</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ClientCore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\Asset.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameEngine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\Sprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\Spritesheet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetRegistry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetsToUse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)State\GameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)State\LoadingState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)State\MenuState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)State\GameplayState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)State\StateId.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Asset\" />
+    <Folder Include="$(MSBuildThisFileDirectory)State\" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\test.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\basic_ground_tiles.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\basic_ground_tiles.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgstats" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\test.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\test.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\basic_ground_tiles.xnb" />
   </ItemGroup>
 </Project>
