@@ -1,6 +1,7 @@
 ﻿using System;
 using DropGrid.Client.Asset;
 using DropGrid.Client.Map;
+using DropGrid.Core.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,22 +13,25 @@ namespace DropGrid.Client.State
     class GameplayState : GameState
     {
         private GameMap map;
-
-        public GameplayState()
-        {
-            map = new GameMap(10, 7);
-        }
+        private GameMapRenderer renderer;
 
         public override StateId GetId() => StateId.Gameplay;
 
+        public override void Initialise(GameEngine engine)
+        {
+            base.Initialise(engine);
+            map = new GameMap(10, 7);
+            renderer = new GameMapRenderer(MapViewPerspectives.ISOMETRIC);
+        }
+
         public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
         {
-            map.Draw(engine, spriteBatch, gameTime);
+            renderer.Draw(map, engine, spriteBatch, gameTime);
         }
 
         public override void Update(GameEngine engine, GameTime gameTime)
         {
-            map.Update(engine, gameTime);
+            renderer.Update(engine, gameTime);
         }
     }
 }

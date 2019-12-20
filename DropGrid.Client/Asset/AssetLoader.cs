@@ -20,12 +20,6 @@ namespace DropGrid.Client.Asset
                 _loadQueue.Enqueue(assetItem);
         }
 
-        public void Add(AssetsToUse assetsToUse)
-        {
-            foreach (Asset asset in assetsToUse.AssetDictionary.Values)
-                Add(asset);
-        }
-
         private void Clear() => _loadQueue.Clear();
 
         public Asset LoadNext()

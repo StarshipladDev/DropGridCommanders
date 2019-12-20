@@ -15,18 +15,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Spritesheet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetRegistry.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetsToUse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\GameState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\LoadingState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\GameplayState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\StateId.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\GameMap.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\Tile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\IPerspective.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\IsometricPerspective.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\CartesianPerspective.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Map\ViewPerspectives.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Map\Camera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Map\GameMapRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Map\TileRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\AnimatedSprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />

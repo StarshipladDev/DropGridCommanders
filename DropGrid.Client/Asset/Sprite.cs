@@ -13,7 +13,7 @@ namespace DropGrid.Client.Asset
 
         public Sprite(String identifier) : base(identifier) { }
 
-        public Sprite(Texture2D data) : base("fromSpritesheet") => _data = data;
+        public Sprite(Texture2D data) : base(null) => _data = data;
 
         public override object GetData()
         {

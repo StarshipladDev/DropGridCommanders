@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropGrid.MacOS", "DropGrid.
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DropGrid.Client", "DropGrid.Client\DropGrid.Client.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "DropGrid.Core", "DropGrid.Core\DropGrid.Core.vcxitems", "{2FBF587E-391E-4D14-AE7A-57B19FA992EA}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DropGrid.Core", "DropGrid.Core\DropGrid.Core.shproj", "{DC1E8C40-376B-484C-8956-3587FDA44C33}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

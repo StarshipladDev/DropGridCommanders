@@ -22,6 +22,11 @@ namespace DropGrid.Client.State
 
         public override StateId GetId() => StateId.Initialise;
 
+        public override void Initialise(GameEngine engine)
+        {
+            base.Initialise(engine);
+        }
+
         public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
         {
             // TODO: Bit font status rendering...

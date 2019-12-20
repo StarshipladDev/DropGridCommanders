@@ -19,9 +19,9 @@ namespace DropGrid.Client.Asset
         public int CellWidth { get; }
         public int CellHeight { get; }
 
-        public Spritesheet(String identifier, int cellSize) : this(identifier, cellSize, cellSize) { }
+        public Spritesheet(String reference, int cellSize) : this(reference, cellSize, cellSize) { }
 
-        public Spritesheet(String identifier, int cellWidth, int cellHeight) : base(identifier)
+        public Spritesheet(String reference, int cellWidth, int cellHeight) : base(reference)
         {
             _cellWidth = cellWidth;
             _cellHeight = cellHeight;

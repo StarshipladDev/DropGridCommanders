@@ -9,7 +9,16 @@ namespace DropGrid.Client.State
     /// </summary>
     abstract class GameState
     {
+        public bool Initialised {get; set;}
+
+        public GameState()
+        {
+            Initialised = false;
+        }
+
         public abstract StateId GetId();
+
+        public virtual void Initialise(GameEngine engine) => Initialised = true;
 
         public abstract void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime);
 
