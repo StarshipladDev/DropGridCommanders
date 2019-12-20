@@ -17,6 +17,9 @@ namespace DropGrid.Client
     /// </summary>
     public class GameEngine : Game
     {
+        // The enlargement factor for game art
+        public static readonly int GRAPHICS_SCALE = 3;
+
         // For drawing objects.
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -61,7 +64,7 @@ namespace DropGrid.Client
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             EnterState(StateId.Initialise);
         }
 

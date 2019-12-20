@@ -36,6 +36,11 @@ namespace DropGrid.Client.Asset
             return nextItem.IsLoaded() ? nextItem : nextItem.Load(_engine.Content);
         }
 
+        internal int GetSize()
+        {
+            return _loadQueue.Count;
+        }
+
         public bool IsEmpty() => _loadQueue.Count == 0;
 
         public bool LoadAll()
