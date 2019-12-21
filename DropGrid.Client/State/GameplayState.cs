@@ -1,5 +1,7 @@
 ﻿using System;
 using DropGrid.Client.Asset;
+using DropGrid.Client.Map;
+using DropGrid.Core.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,29 +12,26 @@ namespace DropGrid.Client.State
     /// </summary>
     class GameplayState : GameState
     {
+        private GameMap map;
+        private GameMapRenderer renderer;
+
         public override StateId GetId() => StateId.Gameplay;
 
-        // TODO: This is only temporary
-        bool loaded = false;
-        AssetsToUse assetsToUse;
+        public override void Initialise(GameEngine engine)
+        {
+            base.Initialise(engine);
+            map = new GameMap(10, 7);
+            renderer = new GameMapRenderer(MapViewPerspectives.ISOMETRIC);
+        }
+
         public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
         {
-            if (!loaded)
-            {
-                assetsToUse = new AssetsToUse().Add(new Spritesheet("basic_ground_tiles", 128));
-
-                AssetLoader.LoadQueue.Add(assetsToUse);
-                AssetLoader.LoadQueue.LoadAll();
-                loaded = true;
-            }
-            spriteBatch.Begin();
-            spriteBatch.Draw((Texture2D)((Spritesheet)assetsToUse.GetAsset("basic_ground_tiles")).getSpriteAt(0, 0).GetData(), new Vector2(200, 200));
-            spriteBatch.End();
+            renderer.Draw(map, engine, spriteBatch, gameTime);
         }
 
         public override void Update(GameEngine engine, GameTime gameTime)
         {
-
+            renderer.Update(engine, gameTime);
         }
     }
 }

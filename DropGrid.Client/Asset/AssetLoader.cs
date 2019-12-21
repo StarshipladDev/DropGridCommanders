@@ -20,12 +20,6 @@ namespace DropGrid.Client.Asset
                 _loadQueue.Enqueue(assetItem);
         }
 
-        public void Add(AssetsToUse assetsToUse)
-        {
-            foreach (Asset asset in assetsToUse.AssetDictionary.Values)
-                Add(asset);
-        }
-
         private void Clear() => _loadQueue.Clear();
 
         public Asset LoadNext()
@@ -34,6 +28,11 @@ namespace DropGrid.Client.Asset
                 throw new InvalidOperationException("The loading queue is empty! Nothing to process.");
             Asset nextItem = _loadQueue.Dequeue();
             return nextItem.IsLoaded() ? nextItem : nextItem.Load(_engine.Content);
+        }
+
+        internal int GetSize()
+        {
+            return _loadQueue.Count;
         }
 
         public bool IsEmpty() => _loadQueue.Count == 0;

@@ -11,6 +11,11 @@ namespace DropGrid.Client.State
     {
         public override StateId GetId() => StateId.Menu;
 
+        public override void Initialise(GameEngine engine)
+        {
+            base.Initialise(engine);
+        }
+
         public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime) => throw new NotImplementedException();
 
         public override void Update(GameEngine engine, GameTime gameTime) => throw new NotImplementedException();
