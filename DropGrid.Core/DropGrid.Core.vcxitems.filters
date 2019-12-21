@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{8472f6be-8c71-426d-934e-4a74296001ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{ca581a05-b9bf-4340-a3ef-19d2ff84cea6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Entity\Unit.cs">
+      <Filter>Entity</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Entity\Entity.cs">
+      <Filter>Entity</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Map\GameMap.cs">
+      <Filter>Map</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Map\MapTile.cs">
+      <Filter>Map</Filter>
+    </None>
+  </ItemGroup>
+</Project>
