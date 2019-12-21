@@ -11,8 +11,8 @@ namespace DropGrid.Client.Map
         public Vector2 toInternalCoordinates(Vector2 point)
         {
             Vector2 result = new Vector2();
-            result.X = (point.X - point.Y) / 1.5f;
-            result.Y = point.X / 3.0f + point.Y / 1.5f;
+            result.X = (2.0f * point.Y + point.X) * 0.5f;
+            result.Y = (2.0f * point.Y - point.X) * 0.5f;
             return result;
         }
 

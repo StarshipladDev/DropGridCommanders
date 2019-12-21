@@ -31,7 +31,7 @@ namespace DropGrid.Client.State
 
         public override void Update(GameEngine engine, GameTime gameTime)
         {
-            renderer.Update(engine, gameTime);
+            renderer.Update(map, engine, gameTime);
         }
     }
 }

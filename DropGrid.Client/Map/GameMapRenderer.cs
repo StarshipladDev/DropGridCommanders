@@ -26,16 +26,18 @@ namespace DropGrid.Client.Map
             {
                 int tileX = i % map.Width;
                 int tileY = i / map.Width;
-                double internX = tileX * MapTileRenderer.TILE_SIZE;
-                double internY = tileY * MapTileRenderer.TILE_SIZE;
-                Vector2 screenCoords = viewPerspective.toViewCoordinates(new Vector2((int)internX, (int)internY));
+                float internX = tileX * MapTileRenderer.TILE_SIZE;
+                float internY = tileY * MapTileRenderer.TILE_SIZE;
+                Vector2 internalCoords = new Vector2(internX, internY);
+                Vector2 screenCoords = viewPerspective.toViewCoordinates(internalCoords);
                 tileRenderer.Draw(map.getTile(i), spriteBatch, gameTime, screenCoords.X + camera.OffsetX, screenCoords.Y + camera.OffsetY);
             }
             spriteBatch.End();
         }
 
-        public void Update(GameEngine engine, GameTime gameTime)
+        public void Update(GameMap map, GameEngine engine, GameTime gameTime)
         {
+
             KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.Up))
             {

@@ -6,22 +6,22 @@ namespace DropGrid.Client.Map
     /// </summary>
     public class Camera
     {
-        public double OffsetX { get; set; }
-        public double OffsetY { get; set; }
+        public float OffsetX { get; set; }
+        public float OffsetY { get; set; }
 
-        public Camera(double x, double y)
+        public Camera(float x, float y)
         {
             OffsetX = x;
             OffsetY = y;
         }
 
-        public void Pan(double xIncrement, double yIncrement)
+        public void Pan(float xIncrement, float yIncrement)
         {
             OffsetX += xIncrement;
             OffsetY += yIncrement;
         }
 
-        public void Set(double offsetX, double offsetY)
+        public void Set(float offsetX, float offsetY)
         {
             OffsetX = offsetX;
             OffsetY = offsetY;
