@@ -14,8 +14,8 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DropGrid.Client\DropGrid.Client.projitems*{16854144-1824-4046-858f-93977e9aabd2}*SharedItemsImports = 4
-		DropGrid.Core\DropGrid.Core.vcxitems*{99fe52f5-46dd-4ab2-85ac-f882b2778a2f}*SharedItemsImports = 9
 		DropGrid.Client\DropGrid.Client.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
+		DropGrid.Core\DropGrid.Core.projitems*{dc1e8c40-376b-484c-8956-3587fda44c33}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86

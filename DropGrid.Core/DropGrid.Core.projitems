@@ -14,5 +14,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Map\GameMap.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Map\MapTile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TurnPhase\Class1.cs" />
   </ItemGroup>
 </Project>
