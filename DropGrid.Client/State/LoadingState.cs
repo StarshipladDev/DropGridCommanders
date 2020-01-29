@@ -29,7 +29,7 @@ namespace DropGrid.Client.State
 
         public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
         {
-            // TODO: Bit font status rendering...
+
         }
 
         private bool firstRun = true;

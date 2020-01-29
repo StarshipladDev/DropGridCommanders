@@ -18,13 +18,14 @@ namespace DropGrid.Client.Asset
         public Asset(string identifier)
         {
             Identifier = identifier;
-            if (identifier != null)
+            if (identifier != null) { 
                 AssetRegistry.RegisterAsset(this);
+            }
         }
 
         public abstract Asset Load(ContentManager contentManager);
 
-        public abstract Object GetData();
+        public abstract object GetData();
 
         public bool IsLoaded() => GetData() != null;
     }

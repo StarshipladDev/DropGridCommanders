@@ -8,7 +8,6 @@ namespace DropGrid.Client.Asset
         private static readonly Dictionary<string, Asset> ALL_ASSETS = new Dictionary<string, Asset>();
 
         // Add new assets here.
-        public static readonly Spritesheet FONT = new Spritesheet("font", 8, 10);
         public static readonly Spritesheet TILESET = new Spritesheet("ground_tiles", 32);
 
         private AssetRegistry() { }
