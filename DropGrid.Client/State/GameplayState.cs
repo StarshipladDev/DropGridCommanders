@@ -1,6 +1,6 @@
 ﻿using System;
 using DropGrid.Client.Asset;
-using DropGrid.Client.Environment;
+using DropGrid.Client.Graphics;
 using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,9 +10,11 @@ namespace DropGrid.Client.State
     /// <summary>
     /// The crux of the client-side game logic belongs here.
     /// </summary>
-    class GameplayState : GameState
+    class GameplayState : EngineState
     {
-        private GameEnvironment gameEnvironment;
+        private ClientGameSession gameSession;
+        private ClientGameEnvironment gameEnvironment;
+        private Player[] players;
 
         public override StateId GetId() => StateId.Gameplay;
 
@@ -20,13 +22,17 @@ namespace DropGrid.Client.State
         {
             base.Initialise(engine);
 
-            gameEnvironment = new GameEnvironment();
-            gameEnvironment.Map = new GameMap(9, 9);
+            players = new Player[] {
+                new Player("Player 1"),
+                new Player("Player 2")
+            };
+            gameEnvironment = new ClientGameEnvironment();
+            gameSession = new ClientGameSession(gameEnvironment, players);
         }
 
-        public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
+        public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
         {
-            gameEnvironment.Draw(engine, spriteBatch, gameTime);
+            gameEnvironment.Draw(engine, renderer, gameTime);
         }
 
         public override void Update(GameEngine engine, GameTime gameTime)

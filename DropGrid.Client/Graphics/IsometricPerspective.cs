@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace DropGrid.Client.Map
+namespace DropGrid.Client.Graphics
 {
     /// <summary>
     /// The chosen perspective of the game.

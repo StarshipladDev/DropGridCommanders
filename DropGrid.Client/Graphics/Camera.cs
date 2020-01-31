@@ -1,5 +1,6 @@
 ﻿using System;
-namespace DropGrid.Client.Map
+
+namespace DropGrid.Client.Graphics
 {
     /// <summary>
     /// Manages screen viewable region and offset.

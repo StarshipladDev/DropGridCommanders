@@ -7,11 +7,11 @@ namespace DropGrid.Client.State
     /// <summary>
     /// Each GameState handles one succinct set of game routines. They each have a unique identifiable state ID.
     /// </summary>
-    abstract class GameState
+    abstract class EngineState
     {
         public bool Initialised {get; set;}
 
-        public GameState()
+        public EngineState()
         {
             Initialised = false;
         }
@@ -20,7 +20,7 @@ namespace DropGrid.Client.State
 
         public virtual void Initialise(GameEngine engine) => Initialised = true;
 
-        public abstract void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime);
+        public abstract void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime);
 
         public abstract void Update(GameEngine engine, GameTime gameTime);
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace DropGrid.Client.Map
+namespace DropGrid.Client.Graphics
 {
     /// <summary>
     /// We work with cartesian co-ordinates within the game code. Only when objects

@@ -2,13 +2,13 @@
 
 namespace DropGrid.Core.Environment
 {
-    public class GameMap
+    public class Map
     {
         MapTile[] tiles;
         public int Width { get;  }
         public int Height { get; }
 
-        public GameMap(int width, int height)
+        public Map(int width, int height)
         {
             this.Width = width;
             this.Height = height;

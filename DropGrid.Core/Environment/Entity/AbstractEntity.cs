@@ -31,6 +31,8 @@ namespace DropGrid.Core.Environment
         public int GetGridWidth() => GridWidth;
         public int GetGridHeight() => GridHeight;
 
+        public bool IsVisible() => true;
+
         public void RemoveOnNextUpdate() => _remove = true;
         public bool ShouldRemove() => _remove;
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace DropGrid.Client.Map
+namespace DropGrid.Client.Graphics
 {
     /// <summary>
     /// Since we are using cartesian co-ordinates internally, the perspective

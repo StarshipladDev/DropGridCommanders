@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using DropGrid.Client.Asset;
+using DropGrid.Client.Graphics;
 using DropGrid.Client.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,11 +24,12 @@ namespace DropGrid.Client
         // For drawing objects.
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private GraphicsRenderer _renderer;
         
         // For game state management.
-        private Dictionary<StateId, GameState> _gameStates;
-        private GameState _currentState;
-        
+        private Dictionary<StateId, EngineState> _gameStates;
+        private EngineState _currentState;
+
         /// <summary>
         /// Sets up internal objects to manage the game loop.
         /// Do not load game assets here.
@@ -37,7 +39,7 @@ namespace DropGrid.Client
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             AssetLoader.Initialise(this);
-            _gameStates = new Dictionary<StateId, GameState>();
+            _gameStates = new Dictionary<StateId, EngineState>();
         }
 
         /// <summary>
@@ -64,6 +66,7 @@ namespace DropGrid.Client
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _renderer = new GraphicsRenderer(_spriteBatch, ViewPerspectives.ISOMETRIC);
             EnterState(StateId.Initialise);
         }
 
@@ -98,7 +101,7 @@ namespace DropGrid.Client
         {
             GraphicsDevice.Clear(Color.Black);
             if (_currentState.Initialised)
-                _currentState.Draw(this, _spriteBatch, gameTime);
+                _currentState.Render(this, _renderer, gameTime);
             base.Draw(gameTime);
         }
 
@@ -106,7 +109,7 @@ namespace DropGrid.Client
         /// Adds a game state instance to the game state map.
         /// </summary>
         /// <param name="state">The state instance.</param>
-        private void RegisterGameState(GameState state)
+        private void RegisterGameState(EngineState state)
         {
             if (state == null)
                 throw new ArgumentException("Cannot register a null state!");
@@ -120,7 +123,7 @@ namespace DropGrid.Client
         /// <param name="id">StateId of the new state.</param>
         public void EnterState(StateId id)
         {
-            GameState state = _gameStates[id];
+            EngineState state = _gameStates[id];
             if (state == null)
                 throw new InvalidOperationException("Attempting to switch to state id '" + state.ToString() + "' which has a null state instance!");
             if (_currentState != null)

@@ -1,12 +1,12 @@
 ﻿using System;
 namespace DropGrid.Core.Environment
 {
-    public class GameSession
+    public class CoreGameSession
     {
-        private GameEnvironment Environment { get; }
-        private GamePlayer[] Players { get; }
+        private CoreGameEnvironment Environment { get; }
+        private Player[] Players { get; }
 
-        public GameSession(GameEnvironment environment, GamePlayer[] players)
+        public CoreGameSession(CoreGameEnvironment environment, Player[] players)
         {
             Environment = environment;
             Players = players;

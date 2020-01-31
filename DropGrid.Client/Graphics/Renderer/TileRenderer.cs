@@ -5,7 +5,7 @@ using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DropGrid.Client.Map
+namespace DropGrid.Client.Graphics
 {
     public class MapTileRenderer
     {
@@ -22,7 +22,7 @@ namespace DropGrid.Client.Map
 
         }
 
-        internal void Draw(MapTile tile, SpriteBatch spriteBatch, GameTime gameTime, double x, double y)
+        internal void Render(MapTile tile, GraphicsRenderer renderer, GameTime gameTime, float x, float y)
         {
             SpriteAnimation tileAnimation = TEXTURES.ContainsKey(tile.Id) ? TEXTURES[tile.Id] : null;
             if (tileAnimation == null)
@@ -30,9 +30,7 @@ namespace DropGrid.Client.Map
 
             // TODO: Draw animation instead of just first sprite
             SpriteFrame frameToDraw = tileAnimation.GetFrame(0);
-            Texture2D texture = (Texture2D)frameToDraw.Sprite.GetData();
-            Rectangle drawSize = new Rectangle((int)x, (int)y, texture.Width * GameEngine.GRAPHICS_SCALE, texture.Height * GameEngine.GRAPHICS_SCALE);
-            spriteBatch.Draw(texture, drawSize, Color.White);
+            renderer.Render(frameToDraw, x, y);
         }
 
         private static SpriteAnimation CreateTileTextureAnimation(params Point[] tilesetCoord)

@@ -4,7 +4,7 @@ using DropGrid.Core.Logic;
 
 namespace DropGrid.Core.Environment
 {
-    public class GameEnvironment
+    public abstract class CoreGameEnvironment
     {
         public static readonly ActionType[] ACTION_ORDER = {
             ActionType.UNIT_DEPLOYMENT,
@@ -13,12 +13,11 @@ namespace DropGrid.Core.Environment
             ActionType.ABILITY_DEPLOYMENT,
         };
 
-        private GameMap Map { get; }
+        private Map Map { get; set; }
         private GameEntityManager Entities { get; }
 
-        public GameEnvironment(GameMap map)
+        public CoreGameEnvironment()
         {
-            Map = map;
             Entities = new GameEntityManager();
         }
     }

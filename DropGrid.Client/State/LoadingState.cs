@@ -9,7 +9,7 @@ namespace DropGrid.Client.State
     /// The initialisation state handles deferred content loading. It is too costly to load ALL game assets into memory during startup.
     /// When new unloaded assets have been requested, we switch to this state and load them.
     /// </summary>
-    class LoadingState : GameState
+    class LoadingState : EngineState
     {
         private bool loadedEverything = false;
         private int totalAssetsToLoad;
@@ -27,7 +27,7 @@ namespace DropGrid.Client.State
             base.Initialise(engine);
         }
 
-        public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
+        public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
         {
 
         }
