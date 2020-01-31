@@ -11,12 +11,20 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Environment\" />
     <Folder Include="$(MSBuildThisFileDirectory)Logic\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Environment\Entity\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Environment\GameMap.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\MapTile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logic\Action.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Unit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logic\ActionType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\GameEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\GameSession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\AbstractEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\GameEntityManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\IGameEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\PlayerUnit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\UnitAttributes.cs" />
   </ItemGroup>
 </Project>
