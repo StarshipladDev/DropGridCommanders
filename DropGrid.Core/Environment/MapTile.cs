@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DropGrid.Core.Map
+namespace DropGrid.Core.Environment
 {
     public class MapTile
     {

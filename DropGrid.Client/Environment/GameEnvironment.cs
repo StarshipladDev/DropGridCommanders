@@ -1,6 +1,6 @@
 ﻿using System;
 using DropGrid.Client.Map;
-using DropGrid.Core.Map;
+using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

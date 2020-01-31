@@ -9,10 +9,14 @@
     <Import_RootNamespace>DropGrid.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Map\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Environment\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Logic\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Map\GameMap.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\MapTile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\GameMap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\MapTile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logic\Action.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Unit.cs" />
   </ItemGroup>
 </Project>

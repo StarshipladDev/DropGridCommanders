@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DropGrid.Core.Map
+namespace DropGrid.Core.Environment
 {
     public class GameMap
     {

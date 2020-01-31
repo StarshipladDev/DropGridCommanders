@@ -1,5 +1,5 @@
 ﻿using System;
-using DropGrid.Core.Map;
+using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
