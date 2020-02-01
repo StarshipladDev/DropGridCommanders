@@ -56,6 +56,6 @@
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\test.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\basic_ground_tiles.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\font.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\ground_tiles.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\tileset.png" />
   </ItemGroup>
 </Project>
