@@ -7,24 +7,24 @@ namespace DropGrid.Client.Graphics
     /// Since we are using cartesian co-ordinates internally, the perspective
     /// part is trivial.
     /// </summary>
-    public class CartesianPerspective : IMapViewPerspective
+    public class CartesianPerspective : IViewPerspective
     {
-        public Vector2 toInternalCoordinates(Vector2 point)
+        public Vector2 ToInternal(Vector2 point)
         {
             return point;
         }
 
-        public Vector2 toInternalCoordinates(Vector3 point)
+        public Vector2 ToInternal(Vector3 point)
         {
             return new Vector2(point.X, point.Y);
         }
 
-        public Vector2 toViewCoordinates(Vector2 point)
+        public Vector2 ToProjected(Vector2 point)
         {
             return point;
         }
 
-        public Vector2 toViewCoordinates(Vector3 point)
+        public Vector2 ToProjected(Vector3 point)
         {
             return new Vector2(point.X, point.Y);
         }

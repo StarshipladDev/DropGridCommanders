@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DropGrid.Core.Logic;
 
 namespace DropGrid.Core.Environment
 {
-    public abstract class CoreGameEnvironment
+    public class CoreGameEnvironment
     {
         public static readonly ActionType[] ACTION_ORDER = {
             ActionType.UNIT_DEPLOYMENT,
@@ -13,12 +12,11 @@ namespace DropGrid.Core.Environment
             ActionType.ABILITY_DEPLOYMENT,
         };
 
-        private Map Map { get; set; }
-        private GameEntityManager Entities { get; }
+        public CoreMap Map { get; set; }
 
         public CoreGameEnvironment()
         {
-            Entities = new GameEntityManager();
+            
         }
     }
 }

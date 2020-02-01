@@ -1,12 +1,13 @@
 ﻿using System;
+
 namespace DropGrid.Core.Environment
 {
-    public abstract class AbstractEntity : IGameEntity
+    public abstract class CoreAbstractEntity : ICoreEntity
     {
         private bool _remove = false;
         private int GridX, GridY, GridWidth, GridHeight;
 
-        public AbstractEntity(int gridWidth, int gridHeight)
+        public CoreAbstractEntity(int gridWidth, int gridHeight)
         {
             this.GridWidth = gridWidth;
             this.GridHeight = gridHeight;

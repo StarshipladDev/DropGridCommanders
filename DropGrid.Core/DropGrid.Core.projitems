@@ -14,16 +14,15 @@
     <Folder Include="$(MSBuildThisFileDirectory)Environment\Entity\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Map.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\MapTile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Logic\Action.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Logic\ActionType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\CoreMap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\CoreMapTile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\CoreGameEnvironment.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Player.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\GameSession.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\AbstractEntity.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\GameEntityManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\IGameEntity.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\PlayerUnit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\CorePlayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\CoreAbstractEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\ICoreEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\CorePlayerUnit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Action.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ActionType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CoreGameSession.cs" />
   </ItemGroup>
 </Project>

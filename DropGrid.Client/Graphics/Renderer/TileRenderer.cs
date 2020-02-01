@@ -22,7 +22,7 @@ namespace DropGrid.Client.Graphics
 
         }
 
-        internal void Render(MapTile tile, GraphicsRenderer renderer, GameTime gameTime, float x, float y)
+        internal static void Render(GraphicsRenderer renderer, GameTime gameTime, CoreMapTile tile, float x, float y)
         {
             SpriteAnimation tileAnimation = TEXTURES.ContainsKey(tile.Id) ? TEXTURES[tile.Id] : null;
             if (tileAnimation == null)

@@ -4,7 +4,7 @@
     /// Defines the standard contract for an entity that may exist in the game
     /// environment.
     /// </summary>
-    public interface IGameEntity
+    public interface ICoreEntity
     {
         /// <summary>
         /// Adjusts the entity X position.

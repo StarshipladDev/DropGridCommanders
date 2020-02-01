@@ -1,9 +1,9 @@
 ﻿using System;
 using DropGrid.Client.Asset;
+using DropGrid.Client.Environment;
 using DropGrid.Client.Graphics;
 using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DropGrid.Client.State
 {
@@ -14,7 +14,7 @@ namespace DropGrid.Client.State
     {
         private ClientGameSession gameSession;
         private ClientGameEnvironment gameEnvironment;
-        private Player[] players;
+        private ClientPlayer[] players;
 
         public override StateId GetId() => StateId.Gameplay;
 
@@ -22,22 +22,24 @@ namespace DropGrid.Client.State
         {
             base.Initialise(engine);
 
-            players = new Player[] {
-                new Player("Player 1"),
-                new Player("Player 2")
+            players = new ClientPlayer[] {
+                new ClientPlayer("Player 1"),
+                new ClientPlayer("Player 2")
             };
             gameEnvironment = new ClientGameEnvironment();
             gameSession = new ClientGameSession(gameEnvironment, players);
+
+            gameEnvironment.Map = new ClientMap(9, 9);
         }
 
         public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
         {
-            gameEnvironment.Draw(engine, renderer, gameTime);
+            EnvironmentRenderer.Render(engine, renderer, gameEnvironment, gameTime);
         }
 
         public override void Update(GameEngine engine, GameTime gameTime)
         {
-            gameEnvironment.Update(engine, gameTime);
+            EnvironmentRenderer.Update(engine, gameEnvironment, gameTime);
         }
     }
 }

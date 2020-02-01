@@ -1,5 +1,5 @@
 ﻿using System;
-namespace DropGrid.Core.Logic
+namespace DropGrid.Core.Environment
 {
     public class Action
     {

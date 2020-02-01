@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace DropGrid.Core.Environment
 {
-    public class MapTile
+    public class CoreMapTile
     {
         public int Id { get; internal set; }
 
-        public MapTile(int id)
+        public CoreMapTile(int id)
         {
             this.Id = id;
         }

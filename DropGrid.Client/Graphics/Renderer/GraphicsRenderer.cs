@@ -4,16 +4,17 @@ using DropGrid.Client.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DropGrid.Client
+namespace DropGrid.Client.Graphics
 {
     public class GraphicsRenderer
     {
         private Camera _camera;
         private SpriteBatch _spriteBatch;
-        private IMapViewPerspective _mapPerspective;
+        private IViewPerspective _mapPerspective;
 
-        public GraphicsRenderer(SpriteBatch spriteBatch, IMapViewPerspective mapPerspective)
+        public GraphicsRenderer(SpriteBatch spriteBatch, IViewPerspective mapPerspective)
         {
+            _camera = new Camera(0, 0);
             _spriteBatch = spriteBatch;
             _mapPerspective = mapPerspective;
         }
@@ -29,14 +30,14 @@ namespace DropGrid.Client
             int textureWidth = texture.Width;
             int textureHeight = texture.Height;
 
-            Vector2 perspectiveTransform = _mapPerspective.toViewCoordinates(new Vector2(x, y));
+            Vector2 perspectiveTransform = _mapPerspective.ToProjected(new Vector2(x, y));
             int drawX = (int) Math.Round(perspectiveTransform.X + _camera.OffsetX);
             int drawY = (int) Math.Round(perspectiveTransform.Y + _camera.OffsetY);
             int drawWidth = textureWidth * GameEngine.GRAPHICS_SCALE;
             int drawHeight = textureHeight * GameEngine.GRAPHICS_SCALE;
 
             Rectangle destination = new Rectangle(drawX, drawY, drawWidth, drawHeight);
-            _spriteBatch.Draw(texture, destination, Color.Transparent);
+            _spriteBatch.Draw(texture, destination, Color.White);
         }
 
         // TODO: Define custom render methods here with camera offsets applied

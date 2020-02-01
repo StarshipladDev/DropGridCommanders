@@ -26,12 +26,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\IsometricPerspective.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\CartesianPerspective.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Assets.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Graphics\ClientGameEnvironment.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Graphics\ClientGameSession.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\EnvironmentRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\MapRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\TileRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\GraphicsRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\GameSessionRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientPlayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientGameEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientMap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientGameSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
@@ -39,18 +42,20 @@
     <Folder Include="$(MSBuildThisFileDirectory)State\" />
     <Folder Include="$(MSBuildThisFileDirectory)Graphics\" />
     <Folder Include="$(MSBuildThisFileDirectory)Graphics\Renderer\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Environment\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Logic\" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Content\test.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\basic_ground_tiles.png" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\basic_ground_tiles.mgcontent" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgstats" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgcontent" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\test.mgcontent" />
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\test.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\basic_ground_tiles.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\font.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\ground_tiles.png" />
   </ItemGroup>
 </Project>
