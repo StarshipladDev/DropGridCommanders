@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Asset.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\MapTileTextures.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Spritesheet.cs" />
@@ -28,13 +29,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Assets.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\EnvironmentRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\MapRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\TileRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\MapTileRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\GraphicsRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\GameSessionRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientPlayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientGameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientMap.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientGameSession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientMapTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />

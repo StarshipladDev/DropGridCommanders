@@ -1,11 +1,10 @@
-﻿using System;
-using DropGrid.Core.Environment;
+﻿using DropGrid.Core.Environment;
 
 namespace DropGrid.Client.Environment
 {
-    public class ClientPlayer : CorePlayer
+    public sealed class ClientPlayer : CorePlayer
     {
-        public ClientPlayer(string name) : base(name)
+        public ClientPlayer(string username) : base(username)
         {
         }
     }

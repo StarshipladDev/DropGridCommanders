@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace DropGrid.Client.Graphics
 {
@@ -7,7 +6,7 @@ namespace DropGrid.Client.Graphics
     /// Since we are using cartesian co-ordinates internally, the perspective
     /// part is trivial.
     /// </summary>
-    public class CartesianPerspective : IViewPerspective
+    public sealed class CartesianPerspective : IViewPerspective
     {
         public Vector2 ToInternal(Vector2 point)
         {

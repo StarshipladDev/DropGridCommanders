@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace DropGrid.Client.Graphics
+﻿namespace DropGrid.Client.Graphics
 {
     /// <summary>
     /// Manages screen viewable region and offset.
     /// </summary>
-    public class Camera
+    public sealed class Camera
     {
         public float OffsetX { get; set; }
         public float OffsetY { get; set; }

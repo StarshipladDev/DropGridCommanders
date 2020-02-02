@@ -1,15 +1,18 @@
-﻿using System;
-
-namespace DropGrid.Core.Environment
+﻿namespace DropGrid.Core.Environment
 {
+    /// <summary>
+    /// Represents a player participating in a <c cref="CoreGameSession">CoreGameSession</c>.
+    /// </summary>
     public abstract class CorePlayer
     {
-        public string _name;
-        public string Name { get { return _name;  } }
+        /// <summary>
+        /// The username of the player.
+        /// </summary>
+        public string Username { get; }
 
-        public CorePlayer(string name)
+        public CorePlayer(string username)
         {
-            this._name = name;
+            Username = username;
         }
     }
 }

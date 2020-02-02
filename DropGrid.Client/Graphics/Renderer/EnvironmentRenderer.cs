@@ -1,16 +1,10 @@
-﻿using System;
-using DropGrid.Client.Asset;
-using DropGrid.Client.Environment;
-using DropGrid.Core.Environment;
+﻿using DropGrid.Client.Environment;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DropGrid.Client.Graphics
 {
-    public class EnvironmentRenderer
+    public static class EnvironmentRenderer
     {
-        private EnvironmentRenderer() { }
-
         public static void Render(GameEngine engine, GraphicsRenderer renderer,
             ClientGameEnvironment clientEnvironment, GameTime gameTime)
         {

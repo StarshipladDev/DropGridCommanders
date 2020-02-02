@@ -3,22 +3,20 @@ using System.Collections.Generic;
 
 namespace DropGrid.Client.Asset
 {
-    public class AssetRegistry
+    public static class AssetRegistry
     {
-        private static readonly Dictionary<string, Asset> ALL_ASSETS = new Dictionary<string, Asset>();
+        private static readonly Dictionary<string, Asset> AllAssets = new Dictionary<string, Asset>();
 
         // Add new assets here.
-        public static readonly Spritesheet TILESET = new Spritesheet("ground_tiles", 32);
+        public static readonly Spritesheet TILESET = new Spritesheet("tileset", 32);
 
-        private AssetRegistry() { }
-
-        public static Asset GetAssetFromReference(String reference) => ALL_ASSETS[reference];
+        public static Asset GetAssetFromReference(string reference) => AllAssets[reference];
 
         public static void RegisterAsset(Asset asset)
         {
-            if (ALL_ASSETS.ContainsKey(asset.Identifier))
+            if (AllAssets.ContainsKey(asset.Identifier))
                 throw new ArgumentException("Another asset exists with reference: " + asset.Identifier);
-            ALL_ASSETS.Add(asset.Identifier, asset);
+            AllAssets.Add(asset.Identifier, asset);
         }
     }
 }

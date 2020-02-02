@@ -16,6 +16,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Environment\CoreMap.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\CoreMapTile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\CoreMapTileType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\CoreGameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\CorePlayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\CoreAbstractEntity.cs" />

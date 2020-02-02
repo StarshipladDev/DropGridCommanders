@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DropGrid.Core.Environment
+﻿namespace DropGrid.Core.Environment
 {
     public abstract class CorePlayerUnit : CoreAbstractEntity
     {

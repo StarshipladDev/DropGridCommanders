@@ -1,20 +1,16 @@
-﻿using System;
-using DropGrid.Client.Environment;
-using DropGrid.Core;
-using DropGrid.Core.Environment;
-using Microsoft.Xna.Framework;
+﻿using DropGrid.Core;
 
 namespace DropGrid.Client.Environment
 {
-    public class ClientGameSession : CoreGameSession
+    public sealed class ClientGameSession : CoreGameSession
     {
         public new ClientGameEnvironment Environment
         {
-            get { return (ClientGameEnvironment)base.Environment; }
-            set { Environment = value; }
+            get => (ClientGameEnvironment)base.Environment;
+            set => base.Environment = value;
         }
 
-        public ClientGameSession(ClientGameEnvironment clientEnvironment, CorePlayer[] players)
+        public ClientGameSession(ClientGameEnvironment clientEnvironment, ClientPlayer[] players)
             : base(clientEnvironment, players)
         {
         }

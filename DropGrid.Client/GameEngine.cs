@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Input;
 namespace DropGrid.Client
 {
     /// <summary>
-    /// This is the main client engine code. 
+    /// This is the main client engine. 
     /// It is responsible for initializing, drawing and updating the game state.
     /// </summary>
     public class GameEngine : Game
@@ -24,10 +24,10 @@ namespace DropGrid.Client
         // For drawing objects.
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private GraphicsRenderer _renderer;
-        
+        public GraphicsRenderer Renderer { get; private set; }
+
         // For game state management.
-        private Dictionary<StateId, EngineState> _gameStates;
+        private readonly Dictionary<StateId, EngineState> _gameStates;
         private EngineState _currentState;
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace DropGrid.Client
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _renderer = new GraphicsRenderer(_spriteBatch, ViewPerspectives.ISOMETRIC);
+            Renderer = new GraphicsRenderer(_spriteBatch, ViewPerspectives.ISOMETRIC);
             EnterState(StateId.Initialise);
         }
 
@@ -101,7 +101,7 @@ namespace DropGrid.Client
         {
             GraphicsDevice.Clear(Color.Black);
             if (_currentState.Initialised)
-                _currentState.Render(this, _renderer, gameTime);
+                _currentState.Render(this, Renderer, gameTime);
             base.Draw(gameTime);
         }
 
@@ -125,7 +125,7 @@ namespace DropGrid.Client
         {
             EngineState state = _gameStates[id];
             if (state == null)
-                throw new InvalidOperationException("Attempting to switch to state id '" + state.ToString() + "' which has a null state instance!");
+                throw new InvalidOperationException("Attempting to switch to state id '" + id + "' which has a null state instance!");
             if (_currentState != null)
                 _currentState.OnExit();
             _currentState = state;

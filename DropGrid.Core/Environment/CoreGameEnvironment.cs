@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DropGrid.Core.Environment
+﻿namespace DropGrid.Core.Environment
 {
+    /// <summary>
+    /// Represents the setting against which the game board (map) and core game logic take place.
+    /// </summary>
     public class CoreGameEnvironment
     {
-        public static readonly ActionType[] ACTION_ORDER = {
-            ActionType.UNIT_DEPLOYMENT,
-            ActionType.UNIT_ATTACK,
-            ActionType.UNIT_MOVE,
-            ActionType.ABILITY_DEPLOYMENT,
-        };
+        /// <summary>
+        /// The map to be used in the environment.
+        /// </summary>
+        protected CoreMap Map { get; set; }
 
-        public CoreMap Map { get; set; }
-
-        public CoreGameEnvironment()
+        protected CoreGameEnvironment()
         {
             
         }

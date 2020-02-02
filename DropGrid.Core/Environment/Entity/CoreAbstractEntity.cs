@@ -1,16 +1,16 @@
-﻿using System;
-
-namespace DropGrid.Core.Environment
+﻿namespace DropGrid.Core.Environment
 {
     public abstract class CoreAbstractEntity : ICoreEntity
     {
-        private bool _remove = false;
-        private int GridX, GridY, GridWidth, GridHeight;
+        private bool _remove;
+        private int _gridX, _gridY;
+        private readonly int _gridWidth;
+        private readonly int _gridHeight;
 
-        public CoreAbstractEntity(int gridWidth, int gridHeight)
+        protected CoreAbstractEntity(int gridWidth, int gridHeight)
         {
-            this.GridWidth = gridWidth;
-            this.GridHeight = gridHeight;
+            _gridWidth = gridWidth;
+            _gridHeight = gridHeight;
         }
 
         /// <summary>
@@ -24,13 +24,13 @@ namespace DropGrid.Core.Environment
             SetGridY(y);
         }
 
-        public void SetGridX(int gridX) => this.GridX = gridX;
-        public void SetGridY(int gridY) => this.GridY = gridY;
+        public void SetGridX(int gridX) => this._gridX = gridX;
+        public void SetGridY(int gridY) => this._gridY = gridY;
 
-        public int GetGridX() => GridX;
-        public int GetGridY() => GridY;
-        public int GetGridWidth() => GridWidth;
-        public int GetGridHeight() => GridHeight;
+        public int GetGridX() => _gridX;
+        public int GetGridY() => _gridY;
+        public int GetGridWidth() => _gridWidth;
+        public int GetGridHeight() => _gridHeight;
 
         public bool IsVisible() => true;
 

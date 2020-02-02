@@ -1,8 +1,6 @@
-﻿using System;
-using DropGrid.Client.Asset;
+﻿using DropGrid.Client.Asset;
 using DropGrid.Client.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DropGrid.Client.State
 {
@@ -12,9 +10,9 @@ namespace DropGrid.Client.State
     /// </summary>
     class LoadingState : EngineState
     {
-        private bool loadedEverything = false;
-        private int totalAssetsToLoad;
-        private int currentlyLoaded;
+        private bool _loadedEverything;
+        private int _totalAssetsToLoad;
+        private int _currentlyLoaded;
 
         public LoadingState()
         {
@@ -22,12 +20,7 @@ namespace DropGrid.Client.State
         }
 
         public override StateId GetId() => StateId.Initialise;
-
-        public override void Initialise(GameEngine engine)
-        {
-            base.Initialise(engine);
-        }
-
+        
         public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
         {
 
@@ -38,26 +31,28 @@ namespace DropGrid.Client.State
         {
             if (firstRun)
             {
-                totalAssetsToLoad = AssetLoader.LoadQueue.GetSize();
-                currentlyLoaded = 0;
+                _totalAssetsToLoad = AssetLoader.LoadQueue.GetSize();
+                _currentlyLoaded = 0;
                 firstRun = false;
             }
-            if (!loadedEverything)
+            if (!_loadedEverything)
             {
                 AssetLoader.LoadQueue.LoadNext();
-                currentlyLoaded++;
-                loadedEverything |= currentlyLoaded == totalAssetsToLoad;
+                _currentlyLoaded++;
+                _loadedEverything |= _currentlyLoaded == _totalAssetsToLoad;
             }
-            if (IsInitializationFinished())
+            if (IsAssetLoaded())
             {
+                MapTileTextures.Initialise();
+
                 engine.EnterState(StateId.Gameplay);
                 return;
             }
         }
 
-        private bool IsInitializationFinished()
+        private bool IsAssetLoaded()
         {
-            return loadedEverything;
+            return _loadedEverything;
         }
     }
 }

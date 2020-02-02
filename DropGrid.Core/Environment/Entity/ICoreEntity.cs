@@ -15,7 +15,7 @@
         /// <summary>
         /// Adjusts the entity Y position.
         /// </summary>
-        /// <param name="gridX">New Y position on the game grid.</param>
+        /// <param name="gridY">New Y position on the game grid.</param>
         void SetGridY(int gridY);
 
         /// <returns>Entity X position on the game grid.</returns>

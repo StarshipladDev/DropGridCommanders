@@ -1,41 +1,38 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace DropGrid.Client.Asset
 {
     /// <summary>
     /// Stores a collection of sprites to be drawn in sequential order to portray an animation.
     /// </summary>
-    public class SpriteAnimation
+    public sealed class SpriteAnimation
     {
 
-        private string AssetReference;
-        private ArrayList SpriteFrames = new ArrayList();
-
-        private SpriteAnimation() { }
+        private string _assetReference;
+        private readonly ArrayList _spriteFrames = new ArrayList();
 
         public SpriteAnimation(string assetReference, params SpriteFrame[] animationFrames)
         {
-            AssetReference = assetReference;
+            _assetReference = assetReference;
             foreach (SpriteFrame subsequentFrame in animationFrames)
-                SpriteFrames.Add(subsequentFrame);
+                _spriteFrames.Add(subsequentFrame);
         }
 
         public SpriteAnimation AddFrame(SpriteFrame frame)
         {
-            SpriteFrames.Add(frame);
+            _spriteFrames.Add(frame);
             return this;
         }
 
         public SpriteFrame GetFrame(int frameIndex)
         {
-            if (frameIndex < 0 || frameIndex >= SpriteFrames.Count)
+            if (frameIndex < 0 || frameIndex >= _spriteFrames.Count)
                 throw new ArgumentException("frameIndex out of bounds: " + frameIndex);
-            return (SpriteFrame)SpriteFrames[frameIndex];
+            return (SpriteFrame)_spriteFrames[frameIndex];
         }
 
-        public static SpriteAnimation create(string reference) => new SpriteAnimation(reference);
+        public static SpriteAnimation Create(string reference) => new SpriteAnimation(reference);
     }
 
     /// <summary>
@@ -48,8 +45,8 @@ namespace DropGrid.Client.Asset
 
         public SpriteFrame(Sprite sprite, int duration)
         {
-            this.Sprite = sprite;
-            this.Duration = duration;
+            Sprite = sprite;
+            Duration = duration;
         }
     }
 }
