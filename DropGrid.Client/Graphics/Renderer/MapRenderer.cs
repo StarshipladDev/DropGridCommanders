@@ -1,4 +1,8 @@
-﻿using DropGrid.Client.Environment;
+﻿using System;
+using System.Collections.Generic;
+using DropGrid.Client.Environment;
+using DropGrid.Core.Environment;
+using DropGrid.MacOS.Graphics.Renderer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -6,25 +10,36 @@ namespace DropGrid.Client.Graphics
 {
     public static class MapRenderer
     {
-        public static void Render(GameEngine engine, GraphicsRenderer render, ClientMap map, GameTime gameTime)
+        public static void Render(GameEngine engine, GraphicsRenderer renderer, ClientMap map, GameTime gameTime)
         {
-            render.Start();
-            for (int i = 0; i < map.Width * map.Height; i++)
+            Dictionary<int, List<IClientEntity>> sortedEntities = GetEntitiesByTilePosition(map);
+            
+            renderer.Start();
+            for (int i = 0; i < map.Width * map.Height; ++i)
             {
                 int tileX = i % map.Width;
                 int tileY = i / map.Width;
-                
                 float drawX = tileX * ClientMapTile.TILE_WIDTH;
-                
-                ClientMapTile mapTile = map[i];
                 float drawY = tileY * ClientMapTile.TILE_HEIGHT;
                 
-                MapTileRenderer.Render(engine, render, gameTime, mapTile, drawX, drawY);
+                MapTileRenderer.Render(engine, renderer, gameTime, map[i], drawX, drawY);
+                if (sortedEntities.ContainsKey(i))
+                    RenderEntities(engine, renderer, gameTime, sortedEntities[i], map[i], drawX, drawY);
             }
             
-            render.Finish();
+            renderer.Finish();
         }
         
+        private static void RenderEntities(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime, 
+            List<IClientEntity> entities, ClientMapTile onTile, float tileDrawX, float tileDrawY)
+        {
+            foreach (IClientEntity entity in entities)
+            {
+                EntityRenderer entityRenderer = EntityRenderers.Get(entity);
+                entityRenderer.Render(engine, renderer, gameTime, entity, onTile, tileDrawX, tileDrawY);
+            }
+        }
+
         public static void Update(GameEngine engine, GameTime gameTime, ClientMap map)
         {
             ClientMapTile tile = GetHighlightedTile(engine, map);
@@ -38,6 +53,22 @@ namespace DropGrid.Client.Graphics
                 
                 MapTileRenderer.Update(engine, gameTime, map[i]);
             }
+        }
+        
+        private static Dictionary<int, List<IClientEntity>> GetEntitiesByTilePosition(ClientMap map)
+        {
+            var result = new Dictionary<int, List<IClientEntity>>();
+            map.Entities.ForEach(entity =>
+            {
+                if (!(entity is IClientEntity))
+                    return;
+
+                int position = entity.GetGridX() + entity.GetGridY() * map.Width;
+                if (!result.ContainsKey(position))
+                    result[position] = new List<IClientEntity>();
+                result[position].Add((IClientEntity) entity);
+            });
+            return result;
         }
 
         public static ClientMapTile GetHighlightedTile(GameEngine engine, ClientMap map)

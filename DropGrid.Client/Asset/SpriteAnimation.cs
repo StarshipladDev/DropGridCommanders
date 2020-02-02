@@ -19,9 +19,9 @@ namespace DropGrid.Client.Asset
                 _spriteFrames.Add(subsequentFrame);
         }
 
-        public SpriteAnimation AddFrame(SpriteFrame frame)
+        public SpriteAnimation AddFrame(Sprite sprite, int duration)
         {
-            _spriteFrames.Add(frame);
+            _spriteFrames.Add(new SpriteFrame(sprite, duration));
             return this;
         }
 

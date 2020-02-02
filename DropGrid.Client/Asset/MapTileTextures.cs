@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace DropGrid.Client.Asset
 {
-    public static class MapTileTextures
+    public static class MapTileTextures 
     {
         /// <summary>
         /// The registrar of all tile textures associated with their ids.
@@ -18,13 +18,12 @@ namespace DropGrid.Client.Asset
             if (_initialised)
                 return;
             
-            RegisterTexture(TileType.EMPTY, null);
-            RegisterTexture(TileType.TEST1, CreateAnimation(new Point(1, 0)));
-            RegisterTexture(TileType.TEST2, CreateAnimation(new Point(2, 0)));
+            Register(TileType.EMPTY, null);
+            Register(TileType.TEST1, CreateAnimation(new Point(1, 0)));
+            Register(TileType.TEST2, CreateAnimation(new Point(2, 0)));
 
             _initialised = true;
         }
-        
         
         private static SpriteAnimation CreateAnimation(params Point[] tilesetCoord)
         {
@@ -32,18 +31,17 @@ namespace DropGrid.Client.Asset
             foreach (Point coord in tilesetCoord)
             {
                 Sprite tileSprite = AssetRegistry.TILESET.GetSpriteAt(coord.X, coord.Y);
-                SpriteFrame frame = new SpriteFrame(tileSprite, 1000);
-                animation.AddFrame(frame);
+                animation.AddFrame(tileSprite, 1000);
             }
             return animation;
         }
 
-        private static void RegisterTexture(TileType tileTypeTemplate, SpriteAnimation tileAnimation)
+        private static void Register(TileType tileTypeTemplate, SpriteAnimation tileAnimation)
         {
             Textures.Add(tileTypeTemplate.Id, tileAnimation);
         }
 
-        public static SpriteAnimation GetTexturesById(int tileId)
+        public static SpriteAnimation GetById(int tileId)
         {
             return Textures[tileId] == null
                 ? throw new ArgumentException("No texture exist for tile id: " + tileId)

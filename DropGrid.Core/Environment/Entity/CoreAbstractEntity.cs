@@ -6,11 +6,23 @@
         private int _gridX, _gridY;
         private readonly int _gridWidth;
         private readonly int _gridHeight;
+        public EntityType EntityType { get; }
 
-        protected CoreAbstractEntity(int gridWidth, int gridHeight)
+        protected CoreAbstractEntity(EntityType entityType, int gridWidth, int gridHeight)
         {
             _gridWidth = gridWidth;
             _gridHeight = gridHeight;
+            EntityType = entityType;
+        }
+
+        protected CoreAbstractEntity(CoreAbstractEntity copy)
+        {
+            EntityType = copy.EntityType;
+            _remove = copy._remove;
+            _gridX = copy.GetGridX();
+            _gridY = copy.GetGridY();
+            _gridWidth = copy.GetGridWidth();
+            _gridHeight = copy.GetGridHeight();
         }
 
         /// <summary>
@@ -24,8 +36,8 @@
             SetGridY(y);
         }
 
-        public void SetGridX(int gridX) => this._gridX = gridX;
-        public void SetGridY(int gridY) => this._gridY = gridY;
+        public void SetGridX(int gridX) => _gridX = gridX;
+        public void SetGridY(int gridY) => _gridY = gridY;
 
         public int GetGridX() => _gridX;
         public int GetGridY() => _gridY;

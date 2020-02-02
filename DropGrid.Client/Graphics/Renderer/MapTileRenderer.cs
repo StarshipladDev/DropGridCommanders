@@ -8,7 +8,7 @@ namespace DropGrid.Client.Graphics
     {
         internal static void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime, ClientMapTile tile, float x, float y)
         {
-            SpriteAnimation tileAnimation = MapTileTextures.GetTexturesById(tile.Id);
+            SpriteAnimation tileAnimation = MapTileTextures.GetById(tile.Id);
 
             // TODO: Draw animation instead of just first sprite
             SpriteFrame frameToDraw = tileAnimation.GetFrame(0);

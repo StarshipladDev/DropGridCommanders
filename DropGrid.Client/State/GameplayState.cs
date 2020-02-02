@@ -1,5 +1,6 @@
 ﻿using DropGrid.Client.Environment;
 using DropGrid.Client.Graphics;
+using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -27,7 +28,10 @@ namespace DropGrid.Client.State
             _gameEnvironment = new ClientGameEnvironment();
             _gameSession = new ClientGameSession(_gameEnvironment, _players);
 
+            // TODO: Testing only
             _gameEnvironment.Map = new ClientMap(9, 9);
+            CorePlayerUnit unit = PlayerUnitFactory.CreateNew(PlayerUnitType.TestSoldier);
+            _gameEnvironment.Map.Entities.Add(new ClientPlayerUnit(unit));
         }
 
         public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)

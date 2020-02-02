@@ -12,9 +12,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Asset.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\MapTileTextures.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\PlayerUnitAssets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientPlayerUnit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Spritesheet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\IClientEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\EntityRenderers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\EngineState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\LoadingState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\MenuState.cs" />
@@ -22,7 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)State\StateId.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\IMapViewPerspective.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Camera.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Asset\AnimatedSprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\SpriteAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\ViewPerspectives.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\IsometricPerspective.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\CartesianPerspective.cs" />
@@ -59,5 +63,8 @@
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\basic_ground_tiles.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\font.png" />
     <None Include="$(MSBuildThisFileDirectory)Content\tileset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\testEntity.png" />
   </ItemGroup>
 </Project>
