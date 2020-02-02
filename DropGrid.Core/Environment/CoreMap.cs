@@ -50,7 +50,7 @@ namespace DropGrid.Core.Environment
             Height = height;
             tiles = new CoreMapTile[width * height];
             for (int i = 0; i < tiles.Length; i++)
-                tiles[i] = new CoreMapTile(CoreMapTileType.EMPTY);
+                tiles[i] = new CoreMapTile(TileType.EMPTY);
         }
 
         /// <summary>

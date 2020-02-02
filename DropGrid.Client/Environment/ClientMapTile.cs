@@ -9,7 +9,7 @@ namespace DropGrid.Client.Environment
 
         public float HeightOffset { get; set; }
 
-        public ClientMapTile(CoreMapTileType tileType) : base(tileType)
+        public ClientMapTile(TileType tileType) : base(tileType)
         {
             HeightOffset = 0;
         }

@@ -10,19 +10,19 @@ namespace DropGrid.Client.Asset
         /// <summary>
         /// The registrar of all tile textures associated with their ids.
         /// </summary>
-        private static readonly Dictionary<int, SpriteAnimation> TEXTURES = new Dictionary<int, SpriteAnimation>();
-        private static bool initialised = false;
+        private static readonly Dictionary<int, SpriteAnimation> Textures = new Dictionary<int, SpriteAnimation>();
+        private static bool _initialised;
 
         public static void Initialise()
         {
-            if (initialised)
+            if (_initialised)
                 return;
             
-            RegisterTexture(CoreMapTileType.EMPTY, null);
-            RegisterTexture(CoreMapTileType.TEST1, CreateAnimation(new Point(1, 0)));
-            RegisterTexture(CoreMapTileType.TEST2, CreateAnimation(new Point(2, 0)));
+            RegisterTexture(TileType.EMPTY, null);
+            RegisterTexture(TileType.TEST1, CreateAnimation(new Point(1, 0)));
+            RegisterTexture(TileType.TEST2, CreateAnimation(new Point(2, 0)));
 
-            initialised = true;
+            _initialised = true;
         }
         
         
@@ -38,16 +38,16 @@ namespace DropGrid.Client.Asset
             return animation;
         }
 
-        private static void RegisterTexture(CoreMapTileType tileTypeTemplate, SpriteAnimation tileAnimation)
+        private static void RegisterTexture(TileType tileTypeTemplate, SpriteAnimation tileAnimation)
         {
-            TEXTURES.Add(tileTypeTemplate.Id, tileAnimation);
+            Textures.Add(tileTypeTemplate.Id, tileAnimation);
         }
 
         public static SpriteAnimation GetTexturesById(int tileId)
         {
-            return TEXTURES[tileId] == null
+            return Textures[tileId] == null
                 ? throw new ArgumentException("No texture exist for tile id: " + tileId)
-                : TEXTURES[tileId];
+                : Textures[tileId];
         }
     }
 }

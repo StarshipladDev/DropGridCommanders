@@ -18,9 +18,9 @@ namespace DropGrid.Client.Environment
             {
                 int rr = r.Next();
                 if (rr % 2 == 0)
-                    this[i] = new ClientMapTile(CoreMapTileType.TEST1);
+                    this[i] = new ClientMapTile(TileType.TEST1);
                 else
-                    this[i] = new ClientMapTile(CoreMapTileType.TEST2);
+                    this[i] = new ClientMapTile(TileType.TEST2);
             }
         }
     }

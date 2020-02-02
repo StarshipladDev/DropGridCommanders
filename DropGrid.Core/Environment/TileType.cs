@@ -2,18 +2,18 @@
 
 namespace DropGrid.Core.Environment
 {
-    public class CoreMapTileType
+    public class TileType
     {
-        private static readonly CoreMapTileType[] Tiles = new CoreMapTileType[128];
+        private static readonly TileType[] Tiles = new TileType[128];
 
-        public static readonly CoreMapTileType EMPTY = new CoreMapTileType(0, true);
-        public static readonly CoreMapTileType TEST1 = new CoreMapTileType(1, false);
-        public static readonly CoreMapTileType TEST2 = new CoreMapTileType(2, true);
+        public static readonly TileType EMPTY = new TileType(0, true);
+        public static readonly TileType TEST1 = new TileType(1, false);
+        public static readonly TileType TEST2 = new TileType(2, true);
 
         public int Id { get; }
         public bool Solid { get; }
 
-        private CoreMapTileType(int id, bool solid)
+        private TileType(int id, bool solid)
         {
             if (Tiles[id] != null)
                 throw new ArgumentException("Duplicated tile id: " + id);
@@ -22,7 +22,7 @@ namespace DropGrid.Core.Environment
             Solid = solid;
         }
 
-        public static CoreMapTileType FromId(int id)
+        public static TileType FromId(int id)
         {
             if (Tiles[id] == null)
                 throw new ArgumentException("No matching tile type with id " + id);
