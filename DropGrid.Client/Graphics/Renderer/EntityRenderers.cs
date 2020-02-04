@@ -13,7 +13,7 @@ namespace DropGrid.MacOS.Graphics.Renderer
     {
         private static readonly Dictionary<EntityType, EntityRenderer> _entityRenderers = new Dictionary<EntityType, EntityRenderer>();
 
-        public static EntityRenderer Get(IClientEntity entity) => _entityRenderers[entity.GetEntityType()];
+        public static EntityRenderer Get(CoreAbstractEntity entity) => _entityRenderers[entity.EntityType];
 
         static EntityRenderers()
         {
@@ -23,13 +23,13 @@ namespace DropGrid.MacOS.Graphics.Renderer
 
     public abstract class EntityRenderer
     {
-        public abstract void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime, IClientEntity entity, ClientMapTile onTile, float drawX, float drawY);
+        public abstract void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime, CoreAbstractEntity entity, ClientMapTile onTile, float drawX, float drawY);
         public abstract void Update(GameEngine engine, GameTime gameTime);
     }
 
     class PlayerUnitEntityRenderer : EntityRenderer
     {
-        public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime, IClientEntity entity, ClientMapTile onTile, float drawX, float drawY)
+        public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime, CoreAbstractEntity entity, ClientMapTile onTile, float drawX, float drawY)
         {
             // TODO: Temporary testing
             ClientPlayerUnit unit = (ClientPlayerUnit) entity;

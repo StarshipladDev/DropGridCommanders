@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DropGrid.Client.Environment;
 using DropGrid.Core.Environment;
 using DropGrid.MacOS.Graphics.Renderer;
@@ -12,7 +11,7 @@ namespace DropGrid.Client.Graphics
     {
         public static void Render(GameEngine engine, GraphicsRenderer renderer, ClientMap map, GameTime gameTime)
         {
-            Dictionary<int, List<IClientEntity>> sortedEntities = GetEntitiesByTilePosition(map);
+            Dictionary<int, List<CoreAbstractEntity>> sortedEntities = GetEntitiesByTilePosition(map);
             
             renderer.Start();
             for (int i = 0; i < map.Width * map.Height; ++i)
@@ -31,9 +30,9 @@ namespace DropGrid.Client.Graphics
         }
         
         private static void RenderEntities(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime, 
-            List<IClientEntity> entities, ClientMapTile onTile, float tileDrawX, float tileDrawY)
+            List<CoreAbstractEntity> entities, ClientMapTile onTile, float tileDrawX, float tileDrawY)
         {
-            foreach (IClientEntity entity in entities)
+            foreach (CoreAbstractEntity entity in entities)
             {
                 EntityRenderer entityRenderer = EntityRenderers.Get(entity);
                 entityRenderer.Render(engine, renderer, gameTime, entity, onTile, tileDrawX, tileDrawY);
@@ -55,18 +54,18 @@ namespace DropGrid.Client.Graphics
             }
         }
         
-        private static Dictionary<int, List<IClientEntity>> GetEntitiesByTilePosition(ClientMap map)
+        private static Dictionary<int, List<CoreAbstractEntity>> GetEntitiesByTilePosition(ClientMap map)
         {
-            var result = new Dictionary<int, List<IClientEntity>>();
+            var result = new Dictionary<int, List<CoreAbstractEntity>>();
             map.Entities.ForEach(entity =>
             {
-                if (!(entity is IClientEntity))
+                if (!entity.GetType().IsSubclassOf(typeof(CoreAbstractEntity)))
                     return;
 
                 int position = entity.GetGridX() + entity.GetGridY() * map.Width;
                 if (!result.ContainsKey(position))
-                    result[position] = new List<IClientEntity>();
-                result[position].Add((IClientEntity) entity);
+                    result[position] = new List<CoreAbstractEntity>();
+                result[position].Add(entity);
             });
             return result;
         }

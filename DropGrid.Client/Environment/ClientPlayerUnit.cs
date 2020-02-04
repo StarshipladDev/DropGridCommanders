@@ -4,7 +4,7 @@ using OpenTK;
 
 namespace DropGrid.Client.Environment
 {
-    public sealed class ClientPlayerUnit : CorePlayerUnit, IClientEntity
+    public sealed class ClientPlayerUnit : CorePlayerUnit
     {
         /// <summary>
         /// Defines where the unit is rendered on screen, excluding offset, in pixel units.
@@ -16,11 +16,6 @@ namespace DropGrid.Client.Environment
             float x = unit.GetGridX() * ClientMapTile.TILE_WIDTH;
             float y = unit.GetGridY() * ClientMapTile.TILE_HEIGHT;
             ScreenPosition = new Vector2(x, y);
-        }
-
-        public EntityType GetEntityType()
-        {
-            return EntityType;
         }
     }
     

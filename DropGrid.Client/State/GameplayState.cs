@@ -21,7 +21,7 @@ namespace DropGrid.Client.State
         {
             base.Initialise(engine);
 
-            _players = new ClientPlayer[] {
+            _players = new[] {
                 new ClientPlayer("Player 1"),
                 new ClientPlayer("Player 2")
             };
