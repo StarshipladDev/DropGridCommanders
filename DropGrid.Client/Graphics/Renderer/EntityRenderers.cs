@@ -6,6 +6,7 @@ using DropGrid.Client.Environment;
 using DropGrid.Client.Graphics;
 using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
+using Vector2 = OpenTK.Vector2;
 
 namespace DropGrid.MacOS.Graphics.Renderer
 {
@@ -35,8 +36,9 @@ namespace DropGrid.MacOS.Graphics.Renderer
             ClientPlayerUnit unit = (ClientPlayerUnit) entity;
             PlayerUnitTextureBank textureBank = PlayerUnitAssets.Get(unit.UnitType);
             SpriteAnimation animation = textureBank.GetAnimation(PlayerUnitAnimationType.Idle);
+            Vector2 position = unit.ScreenPosition;
             
-            renderer.Render(animation.GetFrame(0).Sprite, drawX, drawY, offsetY: -64 + onTile.HeightOffset);
+            renderer.Render(animation, drawX, drawY, offsetY: -64 + onTile.HeightOffset);
         }
 
         public override void Update(GameEngine engine, GameTime gameTime)

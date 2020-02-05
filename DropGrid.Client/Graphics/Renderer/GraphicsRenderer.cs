@@ -9,6 +9,7 @@ namespace DropGrid.Client.Graphics
     {
         private readonly Camera _camera;
         private readonly SpriteBatch _spriteBatch;
+        internal GameTime LastUpdateTime;
         private IViewPerspective Perspective { get; }
         public Vector2 CameraOffset => new Vector2(_camera.OffsetX, _camera.OffsetY);
 
@@ -19,6 +20,13 @@ namespace DropGrid.Client.Graphics
             Perspective = perspective;
         }
 
+        public void Render(SpriteAnimation animation, float x, float y, float offsetX = 0, float offsetY = 0)
+        {
+            SpriteFrame frame = animation.GetCurrentFrame();
+            Render(frame.Sprite, x, y, offsetX, offsetY);
+            animation.Update(LastUpdateTime);
+        }
+        
         public void Render(Sprite sprite, float x, float y, float offsetX=0, float offsetY=0)
         {
             Texture2D texture = (Texture2D)sprite.GetData();

@@ -25,9 +25,13 @@ namespace DropGrid.Client.Asset
             var bank = new PlayerUnitTextureBank();
 
             Spritesheet ss = AssetRegistry.TEST_ENTITY;
-            SpriteAnimation idle = SpriteAnimation.Create(AssetRegistry.TEST_ENTITY.Identifier);
+            SpriteAnimation idle = SpriteAnimation.Create(AssetRegistry.TEST_ENTITY.Identifier)
+                .SetLoop(true)
+                .SetPingPong(true);
+            
             idle.AddFrame(ss.GetSpriteAt(0, 0), 500);
             idle.AddFrame(ss.GetSpriteAt(1, 0), 500);
+            idle.AddFrame(ss.GetSpriteAt(0, 1), 500);
             bank.AddAnimation(PlayerUnitAnimationType.Idle, idle);
 
             Register(PlayerUnitType.TestSoldier, bank);

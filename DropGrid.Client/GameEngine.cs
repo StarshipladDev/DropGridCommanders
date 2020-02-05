@@ -100,6 +100,7 @@ namespace DropGrid.Client
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+            Renderer.LastUpdateTime = gameTime;
             if (_currentState.Initialised)
                 _currentState.Render(this, Renderer, gameTime);
             base.Draw(gameTime);
