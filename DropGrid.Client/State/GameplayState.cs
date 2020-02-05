@@ -22,16 +22,20 @@ namespace DropGrid.Client.State
             base.Initialise(engine);
 
             _players = new[] {
-                new ClientPlayer("Player 1"),
-                new ClientPlayer("Player 2")
+                new ClientPlayer("Player 1", Color.Red),
+                new ClientPlayer("Player 2", Color.Blue)
             };
             _gameEnvironment = new ClientGameEnvironment();
             _gameSession = new ClientGameSession(_gameEnvironment, _players);
 
             // TODO: Testing only
             _gameEnvironment.Map = new ClientMap(9, 9);
-            CorePlayerUnit unit = PlayerUnitFactory.CreateNew(PlayerUnitType.TestSoldier);
+            CorePlayerUnit unit = PlayerUnitFactory.CreateNew(_players[0], PlayerUnitType.TestSoldier);
             _gameEnvironment.Map.Entities.Add(new ClientPlayerUnit(unit));
+            
+            CorePlayerUnit unit2 = PlayerUnitFactory.CreateNew(_players[1], PlayerUnitType.TestSoldier);
+            unit2.SetPosition(2,2);
+            _gameEnvironment.Map.Entities.Add(new ClientPlayerUnit(unit2));
         }
 
         public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)

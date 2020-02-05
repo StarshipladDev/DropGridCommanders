@@ -16,11 +16,9 @@ namespace DropGrid.Client.Environment
 
         public ClientMap(int width, int height) : base(width, height)
         {
-            Random r = new Random();
             for (int i = 0; i < tiles.Length; i++)
             {
-                int rr = r.Next();
-                if (rr % 2 == 0)
+                if (i % 2 == 0)
                     this[i] = new ClientMapTile(TileType.TEST1);
                 else
                     this[i] = new ClientMapTile(TileType.TEST2);

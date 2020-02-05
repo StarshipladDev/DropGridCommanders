@@ -16,7 +16,7 @@ namespace DropGrid.Client.Asset
                 return;
 
             CreateTestSoldierTextureBank();
-            
+
             _initialised = true;
         }
 
@@ -29,9 +29,9 @@ namespace DropGrid.Client.Asset
                 .SetLoop(true)
                 .SetPingPong(true);
             
-            idle.AddFrame(ss.GetSpriteAt(0, 0), 500);
-            idle.AddFrame(ss.GetSpriteAt(1, 0), 500);
-            idle.AddFrame(ss.GetSpriteAt(0, 1), 500);
+            idle.AddFrame(ss.GetSpriteAt(0, 0), 200);
+            idle.AddFrame(ss.GetSpriteAt(1, 0), 200);
+            idle.AddFrame(ss.GetSpriteAt(2, 0), 200);
             bank.AddAnimation(PlayerUnitAnimationType.Idle, idle);
 
             Register(PlayerUnitType.TestSoldier, bank);

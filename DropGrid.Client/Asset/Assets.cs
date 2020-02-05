@@ -9,7 +9,8 @@ namespace DropGrid.Client.Asset
 
         // Add new assets here.
         public static readonly Spritesheet TILESET = new Spritesheet("tileset", 32);
-        public static readonly Spritesheet TEST_ENTITY = new Spritesheet("testEntity", 32);
+        public static readonly Spritesheet TEST_ENTITY = new Spritesheet("testEntity", 16);
+        public static readonly Sprite TILE_SELECTION = new Sprite("selection"); 
 
         public static Asset GetAssetFromReference(string reference) => AllAssets[reference];
 

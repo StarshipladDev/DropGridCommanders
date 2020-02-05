@@ -30,7 +30,8 @@ namespace DropGrid.Client.State
                 // TODO: Automatically register these assets to load on instantiation.
                 AssetLoader.LoadQueue.Add(AssetRegistry.TILESET);
                 AssetLoader.LoadQueue.Add(AssetRegistry.TEST_ENTITY);
-                
+                AssetLoader.LoadQueue.Add(AssetRegistry.TILE_SELECTION);
+
                 _totalAssetsToLoad = AssetLoader.LoadQueue.GetSize();
                 _currentlyLoaded = 0;
                 _firstRun = false;

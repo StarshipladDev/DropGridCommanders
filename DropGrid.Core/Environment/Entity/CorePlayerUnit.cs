@@ -3,6 +3,7 @@
     public class CorePlayerUnit : CoreAbstractEntity
     {
         public PlayerUnitType UnitType { get; }
+        public CorePlayer Player { get; }
         private readonly UnitAttributes _attributes;
 
         /// <summary>
@@ -12,10 +13,11 @@
         /// <param name="attributes"></param>
         /// <param name="gridWidth"></param>
         /// <param name="gridHeight"></param>
-        public CorePlayerUnit(PlayerUnitType unitType, UnitAttributes attributes, int gridWidth, int gridHeight) 
+        public CorePlayerUnit(PlayerUnitType unitType, UnitAttributes attributes, CorePlayer player, int gridWidth, int gridHeight) 
             : base(EntityType.PlayerUnit, gridWidth, gridHeight)
         {
             UnitType = unitType;
+            Player = player;
             _attributes = new UnitAttributes(attributes);
         }
 
@@ -27,6 +29,7 @@
         public CorePlayerUnit(CorePlayerUnit copy) : base(copy)
         {
             UnitType = copy.UnitType;
+            Player = copy.Player;
             _attributes = new UnitAttributes(copy._attributes);
         }
     }

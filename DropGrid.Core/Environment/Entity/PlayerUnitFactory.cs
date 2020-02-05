@@ -9,7 +9,7 @@ namespace DropGrid.Core.Environment
         /// </summary>
         /// <param name="unitType">The type of unit to create.</param>
         /// <returns>A newly generated instance of a given unit type.</returns>
-        public static CorePlayerUnit CreateNew(PlayerUnitType unitType)
+        public static CorePlayerUnit CreateNew(CorePlayer owner, PlayerUnitType unitType)
         {
             UnitTemplate templates = UnitTemplates.Get(unitType);
             if (templates == null)
@@ -19,7 +19,7 @@ namespace DropGrid.Core.Environment
             int unitHeight = templates.UnitHeight;
             UnitAttributes attributes = templates.Attributes;
             
-            return new CorePlayerUnit(unitType, attributes, unitWidth, unitHeight);
+            return new CorePlayerUnit(unitType, attributes, owner, unitWidth, unitHeight);
         }
     }
 }

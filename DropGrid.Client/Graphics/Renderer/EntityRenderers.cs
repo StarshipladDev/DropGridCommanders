@@ -37,8 +37,10 @@ namespace DropGrid.MacOS.Graphics.Renderer
             PlayerUnitTextureBank textureBank = PlayerUnitAssets.Get(unit.UnitType);
             SpriteAnimation animation = textureBank.GetAnimation(PlayerUnitAnimationType.Idle);
             Vector2 position = unit.ScreenPosition;
-            
-            renderer.Render(animation, drawX, drawY, offsetY: -64 + onTile.HeightOffset);
+            Color factionColor = unit.Player.FactionColor;
+
+            float height = ClientMapTile.TILE_HEIGHT / 4 + unit.SpriteSize.Height + onTile.HeightOffset;
+            renderer.Render(animation, position.X, position.Y, offsetY:-height, mask:factionColor);
         }
 
         public override void Update(GameEngine engine, GameTime gameTime)

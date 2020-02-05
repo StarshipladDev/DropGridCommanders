@@ -1,11 +1,14 @@
 ﻿using DropGrid.Core.Environment;
+using Microsoft.Xna.Framework;
 
 namespace DropGrid.Client.Environment
 {
     public sealed class ClientPlayer : CorePlayer
     {
-        public ClientPlayer(string username) : base(username)
+        internal Color FactionColor { get; set; }
+        public ClientPlayer(string username, Color factionColor) : base(username)
         {
+            FactionColor = factionColor;
         }
     }
 }
