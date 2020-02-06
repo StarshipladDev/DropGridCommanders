@@ -1,7 +1,9 @@
-﻿using DropGrid.Client.Environment;
+﻿using System.Diagnostics;
+using DropGrid.Client.Environment;
 using DropGrid.Client.Graphics;
 using DropGrid.Client.Graphics.Renderer;
 using DropGrid.Core.Environment;
+using Metal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -54,6 +56,42 @@ namespace DropGrid.Client.State
         public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
         {
             GameSessionRenderer.Render(engine, renderer, _gameSession, gameTime);
+
+            if (engine.DebugMode)
+            {
+                RenderDebugInfo(engine, renderer, gameTime);
+            }
+        }
+
+        private void RenderDebugInfo(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
+        {
+            // TODO: Temporary debug info
+            (float ox, float oy) = renderer.CameraOffset;
+            string cameraInfo = $"Camera: ({ox}, {oy})";
+            string sessionInfo = "";
+            if (_gameSession != null)
+            {
+                CorePlayer[] players = _gameSession.Players;
+                sessionInfo += "Session:\n";
+                foreach (CorePlayer player in players)
+                {
+                    sessionInfo += " -" + player + "\n";
+                }
+            }
+
+            string entityInfo = "";
+            if (_gameEnvironment != null)
+            {
+                entityInfo = "Entities: " + _gameEnvironment.Map.Entities.Count + "\n";
+                foreach (CoreAbstractEntity entity in _gameEnvironment.Map.Entities)
+                {
+                    if (entity is ClientPlayerUnit unit)
+                        entityInfo += " -" + unit.EntityType + "/" + unit.UnitType + " (" + unit.Player + ")\n";
+                }
+            }
+
+            string debugInfo = "Debug Info:\n" + cameraInfo + "\n" + sessionInfo + "\n" + entityInfo;
+            GameFont.Render(renderer, debugInfo, 20, 20, scale:0.75f);
         }
 
         public override void Update(GameEngine engine, GameTime gameTime)

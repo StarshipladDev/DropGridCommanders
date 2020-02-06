@@ -13,7 +13,7 @@ namespace DropGrid.Client.Environment
 
         public override string ToString()
         {
-            return "ClientPlayer: " + Username;
+            return Username;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿#region Using Statements
+
 using System;
 using System.Collections.Generic;
 using DropGrid.Client.Asset;
@@ -22,13 +23,14 @@ namespace DropGrid.Client
         public static readonly int GRAPHICS_SCALE = 3;
 
         // For drawing objects.
-        private GraphicsDeviceManager _graphics;
+        private GraphicsDeviceManager _deviceManager;
         private SpriteBatch _spriteBatch;
         public GraphicsRenderer Renderer { get; private set; }
 
         // For game state management.
         private readonly Dictionary<StateId, EngineState> _gameStates;
         private EngineState _currentState;
+        public bool DebugMode { get; internal set; }
 
         /// <summary>
         /// Sets up internal objects to manage the game loop.
@@ -36,10 +38,12 @@ namespace DropGrid.Client
         /// </summary>
         public GameEngine()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            _graphics.PreferredBackBufferWidth = 1280;
-            _graphics.PreferredBackBufferHeight = 720;
-            _graphics.ApplyChanges();
+            _deviceManager = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = 1280, 
+                PreferredBackBufferHeight = 720
+            };
+            _deviceManager.ApplyChanges();
 
             Content.RootDirectory = "Content";
             AssetLoader.Initialise(this);
@@ -59,7 +63,10 @@ namespace DropGrid.Client
             RegisterGameState(new LoadingState());
             RegisterGameState(new MenuState());
             RegisterGameState(new GameplayState());
-
+            
+            InputHandler.AddKeyboardListener(new EngineKeyboardListener(this));
+            InputHandler.AddMouseListener(new EngineMouseListener(this));
+            
             base.Initialize();
         }
 
@@ -70,7 +77,7 @@ namespace DropGrid.Client
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Renderer = new GraphicsRenderer(_spriteBatch, ViewPerspectives.ISOMETRIC);
+            Renderer = new GraphicsRenderer(_deviceManager.GraphicsDevice, _spriteBatch, ViewPerspectives.ISOMETRIC);
             EnterState(StateId.Initialise);
         }
 
@@ -95,6 +102,7 @@ namespace DropGrid.Client
             else
                 _currentState.Initialise(this);
             base.Update(gameTime);
+            InputHandler.Update();
         }
 
         /// <summary>
@@ -135,6 +143,66 @@ namespace DropGrid.Client
                 _currentState.OnExit();
             _currentState = state;
             _currentState.OnEnter();
+        }
+    }
+
+    internal sealed class EngineKeyboardListener : IKeyboardListener
+    {
+        private readonly GameEngine _engine;
+
+        public EngineKeyboardListener(GameEngine engine)
+        {
+            _engine = engine;
+        }
+        
+        public void KeyPressed(Keys key)
+        {
+            if (key == Keys.F2)
+            {
+                _engine.DebugMode = !_engine.DebugMode;
+            }
+        }
+
+        public void KeyHeldDown(Keys key)
+        {
+
+        }
+
+        public void KeyReleased(Keys key)
+        {
+
+        }
+
+        public bool CanDispose()
+        {
+            return false;
+        }
+    }
+
+    internal sealed class EngineMouseListener : IMouseListener
+    {
+        private readonly GameEngine _engine;
+
+        public EngineMouseListener(GameEngine engine)
+        {
+            _engine = engine;
+        }
+        
+        public void ButtonPressed(MouseButtonType mouseButtonType)
+        {
+        }
+
+        public void ButtonHeldDown(MouseButtonType mouseButtonType)
+        {
+        }
+
+        public void ButtonReleased(MouseButtonType mouseButtonType)
+        {
+        }
+
+        public bool CanDispose()
+        {
+            return false;
         }
     }
 }

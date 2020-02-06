@@ -20,12 +20,12 @@ namespace DropGrid.Core
         /// <summary>
         /// The game environment in this session.
         /// </summary>
-        protected CoreGameEnvironment Environment { get; set; }
+        public CoreGameEnvironment Environment { get; set; }
         
         /// <summary>
         /// List of participating players in this session.
         /// </summary>
-        private CorePlayer[] Players { get; }
+        public CorePlayer[] Players { get; }
 
         public CoreGameSession(CoreGameEnvironment environment, CorePlayer[] players)
         {

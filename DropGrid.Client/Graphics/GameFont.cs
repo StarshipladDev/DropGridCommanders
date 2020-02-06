@@ -10,7 +10,7 @@ namespace DropGrid.Client.Graphics
         public static readonly FontStyle STYLE_DEFAULT = new DefaultFontStyle();
 
         public static void Render([NotNull] GraphicsRenderer renderer, string text, float x, float y,
-            FontStyle style = null)
+            FontStyle style = null, float scale=1.0f)
         {
             if (style == null)
                 style = STYLE_DEFAULT;
@@ -24,17 +24,17 @@ namespace DropGrid.Client.Graphics
             {
                 if (character == '\n')
                 {
-                    drawY += style.GetCharacterHeight();
-                    drawX = x - style.RawCharacterRenderedWidth;
+                    drawY += style.GetCharacterHeight() * scale;
+                    drawX = x - style.RawCharacterRenderedWidth * scale;
                 }
 
                 Sprite characterImage = style.GetTextureFor(character);
                 if (characterImage != null)
                 {
-                    renderer.Render(characterImage, drawX, drawY, applyOffset:false);
+                    renderer.Render(characterImage, drawX, drawY, applyOffset:false, scale:scale);
                 }
 
-                drawX += style.GetCharacterWidth(character);
+                drawX += style.GetCharacterWidth(character) * scale;
             }
             
             renderer.PopPerspective();
