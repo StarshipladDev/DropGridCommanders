@@ -19,10 +19,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\EntityType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\PlayerUnitFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\PlayerUnitType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\Template\TestAssaultUnitTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\Template\TestMechUnitTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\Template\TestSniperUnitTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\Template\TestSoldierUnitTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\UnitTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\UnitTemplates.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Environment\Entity\UnitTypeTestStandard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\TileType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\CoreGameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\CorePlayer.cs" />

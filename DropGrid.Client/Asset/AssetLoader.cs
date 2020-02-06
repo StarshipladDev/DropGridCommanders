@@ -19,6 +19,13 @@ namespace DropGrid.Client.Asset
                 _loadQueue.Enqueue(assetItem);
         }
 
+        public void AddAll(IEnumerable<Asset> assets)
+        {
+            foreach (Asset asset in assets)
+                _loadQueue.Enqueue(asset);
+
+        }
+
         public Asset LoadNext()
         {
             if (IsEmpty())

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AppKit;
 using DropGrid.Client.Asset;
 using DropGrid.Client.Environment;
 using DropGrid.Core.Environment;
@@ -13,7 +14,6 @@ namespace DropGrid.Client.Graphics
         public static void Render(GameEngine engine, GraphicsRenderer renderer, ClientMap map, GameTime gameTime)
         {
             Dictionary<int, List<CoreAbstractEntity>> sortedEntities = GetEntitiesByTilePosition(map);
-            
             (ClientMapTile tile, Vector2 position) = GetHighlightedTile(engine, map);
             
             renderer.Start();
@@ -76,14 +76,18 @@ namespace DropGrid.Client.Graphics
                 return (null, new Vector2(-1, -1));
 
             Vector2 cameraOffset = engine.Renderer.CameraOffset;
-            Vector2 projectedPosition = new Vector2(mouse.X - cameraOffset.X, mouse.Y - cameraOffset.Y);
+            float mx = mouse.X - cameraOffset.X;
+            float my = mouse.Y - cameraOffset.Y + ClientMapTile.TILE_HEIGHT / 2f;
+            Vector2 projectedPosition = new Vector2(mx, my);
             Vector2 result = ViewPerspectives.ISOMETRIC.ToInternal(projectedPosition);
-
-            int selectX = (int) (result.X / ClientMapTile.TILE_WIDTH);
+            float rx = result.X - ClientMapTile.TILE_WIDTH;
+            float ry = result.Y;
+            
+            int selectX = (int) (rx / ClientMapTile.TILE_WIDTH);
             if (selectX < 0 || selectX > map.Width - 1)
                 return (null, new Vector2(-1, -1));
             
-            int selectY = (int) (result.Y / ClientMapTile.TILE_HEIGHT);
+            int selectY = (int) (ry / ClientMapTile.TILE_HEIGHT);
             if (selectY < 0 || selectY > map.Height - 1)
                 return (null, new Vector2(-1, -1));
             

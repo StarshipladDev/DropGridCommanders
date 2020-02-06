@@ -22,6 +22,8 @@ namespace DropGrid.Client.Environment
                 return (data.Width, data.Height);
             }
         }
+        
+        public PlayerUnitTextureBank Textures { get; }
 
         public new ClientPlayer Player => (ClientPlayer) base.Player;
 
@@ -32,8 +34,9 @@ namespace DropGrid.Client.Environment
             
             float x = unit.GetGridX() * ClientMapTile.TILE_WIDTH + ClientMapTile.TILE_WIDTH / 2;
             float y = unit.GetGridY() * ClientMapTile.TILE_HEIGHT;
-            Console.WriteLine(x + "," + y);
             ScreenPosition = new Vector2(x, y);
+
+            Textures = PlayerUnitAssets.Get(UnitType).MakeCopy();
         }
     }
     

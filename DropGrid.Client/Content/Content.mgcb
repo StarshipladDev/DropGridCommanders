@@ -49,6 +49,18 @@
 /processorParam:TextureFormat=Color
 /build:testEntity.png
 
+#begin tileBoundary.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tileBoundary.png
+
 #begin tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor

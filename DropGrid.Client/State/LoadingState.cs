@@ -1,4 +1,5 @@
-﻿using DropGrid.Client.Asset;
+﻿using System.Collections.Generic;
+using DropGrid.Client.Asset;
 using DropGrid.Client.Graphics;
 using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
@@ -9,7 +10,7 @@ namespace DropGrid.Client.State
     /// The initialisation state handles deferred content loading. It is too costly to load ALL game assets into memory during startup.
     /// When new unloaded assets have been requested, we switch to this state and load them.
     /// </summary>
-    class LoadingState : EngineState
+    sealed class LoadingState : EngineState
     {
         private bool _loadedEverything;
         private int _totalAssetsToLoad;
@@ -27,13 +28,12 @@ namespace DropGrid.Client.State
         {
             if (_firstRun)
             {
-                // TODO: Automatically register these assets to load on instantiation.
-                AssetLoader.LoadQueue.Add(AssetRegistry.TILESET);
-                AssetLoader.LoadQueue.Add(AssetRegistry.TEST_ENTITY);
-                AssetLoader.LoadQueue.Add(AssetRegistry.TILE_SELECTION);
+                List<Asset.Asset> assetsToLoad = AssetRegistry.GetAssetsToLoad();
+                AssetLoader.LoadQueue.AddAll(assetsToLoad);
 
                 _totalAssetsToLoad = AssetLoader.LoadQueue.GetSize();
                 _currentlyLoaded = 0;
+                _loadedEverything = _currentlyLoaded == _totalAssetsToLoad;
                 _firstRun = false;
             }
             if (!_loadedEverything)

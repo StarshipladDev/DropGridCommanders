@@ -27,7 +27,7 @@ namespace DropGrid.Client.Asset
         
         private static SpriteAnimation CreateAnimation(params Point[] tilesetCoord)
         {
-            SpriteAnimation animation = SpriteAnimation.Create(AssetRegistry.TILESET.Identifier);
+            SpriteAnimation animation = new SpriteAnimation();
             foreach (Point coord in tilesetCoord)
             {
                 Sprite tileSprite = AssetRegistry.TILESET.GetSpriteAt(coord.X, coord.Y);

@@ -15,17 +15,71 @@ namespace DropGrid.Client.Asset
             if (_initialised)
                 return;
 
-            CreateTestSoldierTextureBank();
+            CreateTestSoldier();
+            CreateTestSniper();
+            CreateTestAssault();
+            CreateTestMech();
 
             _initialised = true;
         }
 
-        private static void CreateTestSoldierTextureBank()
+        private static void CreateTestMech()
+        {
+            var bank = new PlayerUnitTextureBank();
+            
+            Spritesheet ss = AssetRegistry.TEST_ENTITY;
+            SpriteAnimation idle = new SpriteAnimation()
+                .SetLoop(true)
+                .SetPingPong(true);
+            
+            idle.AddFrame(ss.GetSpriteAt(0, 2), 200);
+            idle.AddFrame(ss.GetSpriteAt(1, 2), 200);
+            idle.AddFrame(ss.GetSpriteAt(2, 2), 200);
+            bank.AddAnimation(PlayerUnitAnimationType.Idle, idle);
+
+            Register(PlayerUnitType.TestMech, bank);
+        }
+
+        private static void CreateTestAssault()
+        {
+            var bank = new PlayerUnitTextureBank();
+            
+            Spritesheet ss = AssetRegistry.TEST_ENTITY;
+            SpriteAnimation idle = new SpriteAnimation()
+                .SetLoop(true)
+                .SetPingPong(true);
+            
+            idle.AddFrame(ss.GetSpriteAt(0, 3), 200);
+            idle.AddFrame(ss.GetSpriteAt(1, 3), 200);
+            idle.AddFrame(ss.GetSpriteAt(2, 3), 200);
+            bank.AddAnimation(PlayerUnitAnimationType.Idle, idle);
+
+            Register(PlayerUnitType.TestAssault, bank);
+        }
+
+        private static void CreateTestSniper()
+        {
+            var bank = new PlayerUnitTextureBank();
+            
+            Spritesheet ss = AssetRegistry.TEST_ENTITY;
+            SpriteAnimation idle = new SpriteAnimation()
+                .SetLoop(true)
+                .SetPingPong(true);
+            
+            idle.AddFrame(ss.GetSpriteAt(0, 1), 200);
+            idle.AddFrame(ss.GetSpriteAt(1, 1), 200);
+            idle.AddFrame(ss.GetSpriteAt(2, 1), 200);
+            bank.AddAnimation(PlayerUnitAnimationType.Idle, idle);
+
+            Register(PlayerUnitType.TestSniper, bank);
+        }
+
+        private static void CreateTestSoldier()
         {
             var bank = new PlayerUnitTextureBank();
 
             Spritesheet ss = AssetRegistry.TEST_ENTITY;
-            SpriteAnimation idle = SpriteAnimation.Create(AssetRegistry.TEST_ENTITY.Identifier)
+            SpriteAnimation idle = new SpriteAnimation()
                 .SetLoop(true)
                 .SetPingPong(true);
             
@@ -52,8 +106,8 @@ namespace DropGrid.Client.Asset
     
     public sealed class PlayerUnitTextureBank
     {
-        private static readonly Dictionary<PlayerUnitAnimationType, SpriteAnimation> _animations = new Dictionary<PlayerUnitAnimationType, SpriteAnimation>();
-        
+        private readonly Dictionary<PlayerUnitAnimationType, SpriteAnimation> _animations = new Dictionary<PlayerUnitAnimationType, SpriteAnimation>();
+
         internal void AddAnimation(PlayerUnitAnimationType animationType, SpriteAnimation animation) => _animations[animationType] = animation;
 
         public SpriteAnimation GetAnimation(PlayerUnitAnimationType animationType)
@@ -61,6 +115,17 @@ namespace DropGrid.Client.Asset
             return _animations[animationType] == null
                 ? throw new ArgumentException("No animation exist for animation type: " + animationType)
                 : _animations[animationType];
+        }
+
+        public PlayerUnitTextureBank MakeCopy()
+        {
+            PlayerUnitTextureBank copyBank = new PlayerUnitTextureBank();
+            foreach (PlayerUnitAnimationType animationType in _animations.Keys)
+            {
+                SpriteAnimation animationCopy = _animations[animationType].GetFreshCopy();
+                copyBank.AddAnimation(animationType, animationCopy);
+            }
+            return copyBank;
         }
     }
 }

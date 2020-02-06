@@ -22,7 +22,6 @@ namespace DropGrid.Client.Asset
 
         public override Asset Load(ContentManager contentManager)
         {
-            Console.WriteLine("Loading...");
             _data = contentManager.Load<Texture2D>(Identifier);
             return this;
         }

@@ -33,9 +33,21 @@ namespace DropGrid.Client.State
             CorePlayerUnit unit = PlayerUnitFactory.CreateNew(_players[0], PlayerUnitType.TestSoldier);
             _gameEnvironment.Map.Entities.Add(new ClientPlayerUnit(unit));
             
-            CorePlayerUnit unit2 = PlayerUnitFactory.CreateNew(_players[1], PlayerUnitType.TestSoldier);
+            CorePlayerUnit unit6 = PlayerUnitFactory.CreateNew(_players[0], PlayerUnitType.TestSoldier);
+            unit6.SetPosition(3, 3);
+            _gameEnvironment.Map.Entities.Add(new ClientPlayerUnit(unit6));
+            
+            CorePlayerUnit unit2 = PlayerUnitFactory.CreateNew(_players[1], PlayerUnitType.TestSniper);
             unit2.SetPosition(2,2);
             _gameEnvironment.Map.Entities.Add(new ClientPlayerUnit(unit2));
+            
+            CorePlayerUnit unit3 = PlayerUnitFactory.CreateNew(_players[0], PlayerUnitType.TestAssault);
+            unit3.SetPosition(1,5);
+            _gameEnvironment.Map.Entities.Add(new ClientPlayerUnit(unit3));
+            
+            CorePlayerUnit unit4 = PlayerUnitFactory.CreateNew(_players[1], PlayerUnitType.TestMech);
+            unit4.SetPosition(0,6);
+            _gameEnvironment.Map.Entities.Add(new ClientPlayerUnit(unit4));
         }
 
         public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)

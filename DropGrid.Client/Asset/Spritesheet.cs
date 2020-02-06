@@ -60,6 +60,8 @@ namespace DropGrid.Client.Asset
         /// <returns></returns>
         public Sprite GetSpriteAt(int cellX, int cellY)
         {
+            if (_sprites == null)
+                throw new InvalidOperationException("Attempting to retrieve spritesheet data before initialization!");
             return _sprites[cellX + cellY * _cellColumns];
         }
     }

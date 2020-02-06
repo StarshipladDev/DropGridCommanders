@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using ObjCRuntime;
 
 namespace DropGrid.Client.Asset
 {
@@ -11,31 +9,29 @@ namespace DropGrid.Client.Asset
     /// </summary>
     public sealed class SpriteAnimation
     {
-
-        private string _assetReference;
         private readonly List<SpriteFrame> _spriteFrames = new List<SpriteFrame>();
         
         /// <summary>
         /// Whether to play the animation in an endless cycle.
         /// </summary>
-        private bool _loop = false;
+        private bool _loop;
         
         /// <summary>
         /// When animation reaches the end for the first time, play the next cycle in reverse mode, then reverse again...
         /// </summary>
-        private bool _pingPong = false;
+        private bool _pingPong;
         
         /// <summary>
         /// Related to <c>_pingPong</c>, determines if this cycle should iterate frames backwards.
         /// </summary>
-        private bool _playReverse = false;
+        private bool _playReverse;
 
-        private bool _done = false;
+        private bool _done;
         
         /// <summary>
         /// Counter for which current frame we are displaying.
         /// </summary>
-        private int _currentFrame = 0;
+        private int _currentFrame;
         
         /// <summary>
         /// Time, in milliseconds, of last time we updated our frame.
@@ -47,9 +43,8 @@ namespace DropGrid.Client.Asset
         /// </summary>
         private long _accumulatedTime;
 
-        public SpriteAnimation(string assetReference, params SpriteFrame[] animationFrames)
+        public SpriteAnimation(params SpriteFrame[] animationFrames)
         {
-            _assetReference = assetReference;
             foreach (SpriteFrame subsequentFrame in animationFrames)
                 _spriteFrames.Add(subsequentFrame);
         }
@@ -173,8 +168,16 @@ namespace DropGrid.Client.Asset
             _lastUpdateTime = new DateTime().Millisecond;
             _accumulatedTime = 0;
         }
-
-        public static SpriteAnimation Create(string reference) => new SpriteAnimation(reference);
+        
+        public SpriteAnimation GetFreshCopy()
+        {
+            SpriteAnimation copy = new SpriteAnimation();
+            _spriteFrames.ForEach(item => copy._spriteFrames.Add(item));
+            copy._loop = _loop;
+            copy._pingPong = _pingPong;
+            copy.Reset();
+            return copy;
+        }
     }
 
     /// <summary>

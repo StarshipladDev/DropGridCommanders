@@ -12,6 +12,9 @@ namespace DropGrid.Core.Environment
         {
             Templates = new Dictionary<PlayerUnitType, UnitTemplate>();
             Register(PlayerUnitType.TestSoldier, new TestSoldierUnitTemplate());
+            Register(PlayerUnitType.TestSniper, new TestSniperUnitTemplate());
+            Register(PlayerUnitType.TestAssault, new TestAssaultUnitTemplate());
+            Register(PlayerUnitType.TestMech, new TestMechUnitTemplate());
         }
 
         private static void Register(PlayerUnitType unitType, UnitTemplate templates)
