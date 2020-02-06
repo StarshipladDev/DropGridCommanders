@@ -11,9 +11,10 @@ namespace DropGrid.Client.Asset
     /// </summary>
     public sealed class Spritesheet : Asset
     {
-        private readonly int _cellWidth;
-        private readonly int _cellHeight;
-        private int _cellRows, _cellColumns;
+        public int CellWidth { get; }
+        public int CellHeight { get; }
+        public int CellsAcross { get; private set; }
+        public int CellsDown { get; private set; }
 
         private Sprite[] _sprites;
 
@@ -21,25 +22,25 @@ namespace DropGrid.Client.Asset
 
         public Spritesheet(String reference, int cellWidth, int cellHeight) : base(reference)
         {
-            _cellWidth = cellWidth;
-            _cellHeight = cellHeight;
+            CellWidth = cellWidth;
+            CellHeight = cellHeight;
         }
 
         public override Asset Load(ContentManager contentManager)
         {
             Texture2D master = contentManager.Load<Texture2D>(Identifier);
-            _cellColumns = master.Width / _cellWidth;
-            _cellRows = master.Height / _cellHeight;
-            int totalCells = _cellColumns * _cellRows;
+            CellsAcross = master.Width / CellWidth;
+            CellsDown = master.Height / CellHeight;
+            int totalCells = CellsDown * CellsAcross;
             _sprites = new Sprite[totalCells];
             for (int i = 0; i < _sprites.Length; i++)
             {
-                int x = i % _cellColumns;
-                int y = i / _cellColumns;
-                Color[] rasterData = new Color[_cellWidth * _cellHeight];
-                Rectangle extractRegion = new Rectangle(x * _cellWidth, y * _cellHeight, _cellWidth, _cellHeight);
-                master.GetData(0, extractRegion, rasterData, 0, _cellWidth * _cellHeight);
-                Texture2D subImage = new Texture2D(master.GraphicsDevice, _cellWidth, _cellHeight);
+                int x = i % CellsAcross;
+                int y = i / CellsAcross;
+                Color[] rasterData = new Color[CellWidth * CellHeight];
+                Rectangle extractRegion = new Rectangle(x * CellWidth, y * CellHeight, CellWidth, CellHeight);
+                master.GetData(0, extractRegion, rasterData, 0, CellWidth * CellHeight);
+                Texture2D subImage = new Texture2D(master.GraphicsDevice, CellWidth, CellHeight);
                 subImage.SetData(rasterData);
                 _sprites[i] = new Sprite(subImage);
             }
@@ -62,7 +63,7 @@ namespace DropGrid.Client.Asset
         {
             if (_sprites == null)
                 throw new InvalidOperationException("Attempting to retrieve spritesheet data before initialization!");
-            return _sprites[cellX + cellY * _cellColumns];
+            return _sprites[cellX + cellY * CellsAcross];
         }
     }
 }

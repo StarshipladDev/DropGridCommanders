@@ -10,5 +10,10 @@ namespace DropGrid.Client.Environment
         {
             FactionColor = factionColor;
         }
+
+        public override string ToString()
+        {
+            return "ClientPlayer: " + Username;
+        }
     }
 }

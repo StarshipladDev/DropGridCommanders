@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Spritesheet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\GameFont.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\EntityRenderers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\EngineState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\LoadingState.cs" />

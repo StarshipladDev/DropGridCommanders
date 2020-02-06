@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using DropGrid.Client.Asset;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,34 +12,38 @@ namespace DropGrid.Client.Graphics
         private readonly Camera _camera;
         private readonly SpriteBatch _spriteBatch;
         internal GameTime LastUpdateTime;
-        private IViewPerspective Perspective { get; }
+        private readonly Stack<IViewPerspective> _perspective = new Stack<IViewPerspective>();
+
         public Vector2 CameraOffset => new Vector2(_camera.OffsetX, _camera.OffsetY);
 
         public GraphicsRenderer(SpriteBatch spriteBatch, IViewPerspective perspective)
         {
-            _camera = new Camera(0, 0);
+            _camera = new Camera(350, 0);
             _spriteBatch = spriteBatch;
-            Perspective = perspective;
+            PushPerspective(perspective);
+
+            if (_perspective.Count != 1)
+                throw new InvalidOperationException("Bad internal state: renderer perspective stack should be of size 1");
         }
 
-        public void Render(SpriteAnimation animation, float x, float y, 
-            float offsetX = 0, float offsetY = 0, Color mask=new Color())
+        public void Render([NotNull] SpriteAnimation animation, float x, float y, 
+            float offsetX = 0, float offsetY = 0, Color mask=new Color(), bool applyOffset=true)
         {
             SpriteFrame frame = animation.GetCurrentFrame();
-            Render(frame.Sprite, x, y, offsetX, offsetY, mask);
+            Render(frame.Sprite, x, y, offsetX, offsetY, mask, applyOffset);
             animation.Update(LastUpdateTime);
         }
         
-        public void Render(Sprite sprite, float x, float y, 
-            float offsetX=0, float offsetY=0, Color mask=new Color())
+        public void Render([NotNull] Sprite sprite, float x, float y, 
+            float offsetX=0, float offsetY=0, Color mask=new Color(), bool applyOffset=true)
         {
             Texture2D texture = (Texture2D)sprite.GetData();
             int textureWidth = texture.Width;
             int textureHeight = texture.Height;
 
-            (float transformedX, float transformedY) = Perspective.ToProjected(new Vector2(x, y));
-            int drawX = (int) Math.Round(transformedX + _camera.OffsetX + offsetX);
-            int drawY = (int) Math.Round(transformedY + _camera.OffsetY + offsetY);
+            (float transformedX, float transformedY) = GetProjectedCoordinates(new Vector2(x, y));
+            int drawX = (int) (applyOffset ? Math.Round(transformedX + _camera.OffsetX + offsetX) : transformedX);
+            int drawY = (int) (applyOffset ? Math.Round(transformedY + _camera.OffsetY + offsetY) : transformedY);
             int drawWidth = textureWidth * GameEngine.GRAPHICS_SCALE;
             int drawHeight = textureHeight * GameEngine.GRAPHICS_SCALE;
 
@@ -49,6 +55,24 @@ namespace DropGrid.Client.Graphics
 
         // TODO: Define custom render methods here with camera offsets applied
 
+        public void PushPerspective([NotNull] IViewPerspective perspective) => _perspective.Push(perspective);
+
+        public IViewPerspective PopPerspective()
+        {
+            if (_perspective.Count == 1)
+                throw new InvalidOperationException("Cannot pop last view perspective in the stack!");
+
+            return _perspective.Pop();
+        }  
+
+        public IViewPerspective GetCurrentPerspective() => _perspective.Peek();
+
+        public Vector2 GetProjectedCoordinates(Vector2 coords) => GetCurrentPerspective().ToProjected(coords);
+        public Vector2 GetProjectedCoordinates(Vector3 coords) => GetCurrentPerspective().ToProjected(coords);
+        
+        public Vector2 GetInternalCoordinates(Vector2 coords) => GetCurrentPerspective().ToInternal(coords);
+        public Vector2 GetInternalCoordinates(Vector3 coords) => GetCurrentPerspective().ToInternal(coords);
+        
         public void Start() => _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         public void Finish() => _spriteBatch.End();
 

@@ -1,5 +1,6 @@
 ﻿using DropGrid.Client.Environment;
 using DropGrid.Client.Graphics;
+using DropGrid.Client.Graphics.Renderer;
 using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -52,7 +53,7 @@ namespace DropGrid.Client.State
 
         public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
         {
-            EnvironmentRenderer.Render(engine, renderer, _gameEnvironment, gameTime);
+            GameSessionRenderer.Render(engine, renderer, _gameSession, gameTime);
         }
 
         public override void Update(GameEngine engine, GameTime gameTime)
@@ -68,7 +69,7 @@ namespace DropGrid.Client.State
             else if (keyboard.IsKeyDown(Keys.D))
                 engine.Renderer.CameraPan(-5, 0);
 
-            EnvironmentRenderer.Update(engine, _gameEnvironment, gameTime);
+            GameSessionRenderer.Update(engine, _gameSession, gameTime);
         }
     }
 }
