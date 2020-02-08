@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,8 +13,6 @@ namespace DropGrid.Core.TurnPhase
 
 
 
-
-    */
     // Name !! means Name is an ecplicit phase
     //Deploy !!
     //Resolve deployment errors with assault step
@@ -197,4 +195,5 @@ namespace DropGrid.Core.TurnPhase
         }
 
     }
+    */
 }

@@ -36,6 +36,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Environment\Action.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Environment\ActionType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoreGameSession.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TurnPhase\Phase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logic\TurnPhase\Phase.cs" />
   </ItemGroup>
 </Project>
