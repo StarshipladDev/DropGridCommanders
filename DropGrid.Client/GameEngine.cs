@@ -20,10 +20,10 @@ namespace DropGrid.Client
     public class GameEngine : Game
     {
         // The enlargement factor for game art
-        public static readonly int GRAPHICS_SCALE = 3;
+        public const int GraphicsScale = 3;
 
         // For drawing objects.
-        private GraphicsDeviceManager _deviceManager;
+        private readonly GraphicsDeviceManager _deviceManager;
         private SpriteBatch _spriteBatch;
         public GraphicsRenderer Renderer { get; private set; }
 

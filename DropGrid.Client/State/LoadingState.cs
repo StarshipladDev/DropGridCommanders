@@ -6,10 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace DropGrid.Client.State
 {
-    /// <summary>
-    /// The initialisation state handles deferred content loading. It is too costly to load ALL game assets into memory during startup.
-    /// When new unloaded assets have been requested, we switch to this state and load them.
-    /// </summary>
+
     sealed class LoadingState : EngineState
     {
         private bool _loadedEverything;

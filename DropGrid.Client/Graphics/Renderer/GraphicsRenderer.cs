@@ -46,8 +46,8 @@ namespace DropGrid.Client.Graphics
             (float transformedX, float transformedY) = GetProjectedCoordinates(new Vector2(x, y));
             int drawX = (int) (applyOffset ? Math.Round(transformedX + _camera.OffsetX + offsetX) : transformedX);
             int drawY = (int) (applyOffset ? Math.Round(transformedY + _camera.OffsetY + offsetY) : transformedY);
-            int drawWidth = (int) Math.Round(textureWidth * GameEngine.GRAPHICS_SCALE * scale);
-            int drawHeight = (int) Math.Round(textureHeight * GameEngine.GRAPHICS_SCALE * scale);
+            int drawWidth = (int) Math.Round(textureWidth * GameEngine.GraphicsScale * scale);
+            int drawHeight = (int) Math.Round(textureHeight * GameEngine.GraphicsScale * scale);
 
             if (mask.A == 0)
                 mask = Color.White;
