@@ -24,7 +24,7 @@ namespace DropGrid.Client.State
             base.Initialise(engine);
 
             _players = new[] {
-                new ClientPlayer("Player 1", Color.Red),
+                new ClientPlayer("Player 1", Color.Aquamarine),
                 new ClientPlayer("Player 2", Color.Blue)
             };
             _gameEnvironment = new ClientGameEnvironment();

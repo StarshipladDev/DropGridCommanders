@@ -29,15 +29,15 @@ namespace DropGrid.Client.Graphics
         }
 
         public void Render([NotNull] SpriteAnimation animation, float x, float y, 
-            float offsetX = 0, float offsetY = 0, Color mask=new Color(), bool applyOffset=true, float scale=1.0f)
+            float offsetX = 0, float offsetY = 0, Color mask=new Color(), bool applyOffset=true, float customScaling=1.0f)
         {
             SpriteFrame frame = animation.GetCurrentFrame();
-            Render(frame.Sprite, x, y, offsetX, offsetY, mask, applyOffset, scale);
+            Render(frame.Sprite, x, y, offsetX, offsetY, mask, applyOffset, customScaling);
             animation.Update(LastUpdateTime);
         }
         
         public void Render([NotNull] Sprite sprite, float x, float y, 
-            float offsetX=0, float offsetY=0, Color mask=new Color(), bool applyOffset=true, float scale=1.0f)
+            float offsetX=0, float offsetY=0, Color mask=new Color(), bool applyOffset=true, float customScaling=1.0f)
         {
             Texture2D texture = (Texture2D)sprite.GetData();
             int textureWidth = texture.Width;
@@ -46,8 +46,8 @@ namespace DropGrid.Client.Graphics
             (float transformedX, float transformedY) = GetProjectedCoordinates(new Vector2(x, y));
             int drawX = (int) (applyOffset ? Math.Round(transformedX + _camera.OffsetX + offsetX) : transformedX);
             int drawY = (int) (applyOffset ? Math.Round(transformedY + _camera.OffsetY + offsetY) : transformedY);
-            int drawWidth = (int) Math.Round(textureWidth * GameEngine.GraphicsScale * scale);
-            int drawHeight = (int) Math.Round(textureHeight * GameEngine.GraphicsScale * scale);
+            int drawWidth = (int) Math.Round(textureWidth * GameEngine.GraphicsScale * customScaling);
+            int drawHeight = (int) Math.Round(textureHeight * GameEngine.GraphicsScale * customScaling);
 
             if (mask.A == 0)
                 mask = Color.White;

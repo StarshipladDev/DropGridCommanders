@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DropGrid.Client.Asset;
 using JetBrains.Annotations;
+using Microsoft.Xna.Framework;
 
 namespace DropGrid.Client.Graphics
 {
@@ -25,16 +26,18 @@ namespace DropGrid.Client.Graphics
         /// <param name="style">Optional: type of font to use, set to <c cref="STYLE_DEFAULT">FontStyle.STYLE_DEFAULT</c> by default.</param>
         /// <param name="scale">Optional: size of each character, which is 1.0f magnification by default.</param>
         public static void Render([NotNull] GraphicsRenderer renderer, string text, float x, float y,
-            FontStyle style = null, float scale = 1.0f)
+            FontStyle style = null, float scale = 1.0f, Color color = new Color())
         {
             if (style == null)
                 style = STYLE_DEFAULT;
+            if (color.A == 0)
+                color = Color.White;
             
             renderer.Start();
             renderer.PushPerspective(ViewPerspectives.CARTESIAN);
             float drawX = x;
             float drawY = y;
-            
+
             foreach (char character in text)
             {
                 if (character == '\n')
@@ -42,11 +45,11 @@ namespace DropGrid.Client.Graphics
                     drawY += style.GetCharacterHeight() * scale;
                     drawX = x;
                 }
-
+                
                 Sprite characterImage = style.GetTextureFor(character);
                 if (characterImage != null)
                 {
-                    renderer.Render(characterImage, drawX, drawY, applyOffset:false, scale:scale);
+                    renderer.Render(characterImage, drawX, drawY, applyOffset:false, customScaling:scale, mask:color);
                 }
 
                 drawX += style.GetCharacterWidth(character) * scale;
