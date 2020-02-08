@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 namespace DropGrid.Client.Asset
 {
-    class AssetLoader
+    internal sealed class AssetLoader
     {
         private GameEngine _engine;
-        private Queue<Asset> _loadQueue = new Queue<Asset>();
+        private readonly Queue<Asset> _loadQueue = new Queue<Asset>();
 
-        private static AssetLoader _instance = null;
-        public static AssetLoader LoadQueue { get { return _instance; } }
+        public static AssetLoader LoadQueue { get; private set; }
 
         private AssetLoader() { }
 
@@ -20,7 +19,12 @@ namespace DropGrid.Client.Asset
                 _loadQueue.Enqueue(assetItem);
         }
 
-        private void Clear() => _loadQueue.Clear();
+        public void AddAll(IEnumerable<Asset> assets)
+        {
+            foreach (Asset asset in assets)
+                _loadQueue.Enqueue(asset);
+
+        }
 
         public Asset LoadNext()
         {
@@ -46,10 +50,9 @@ namespace DropGrid.Client.Asset
 
         public static void Initialise(GameEngine gameEngine)
         {
-            if (_instance != null)
+            if (LoadQueue != null)
                 throw new InvalidOperationException("AssetLoader cannot be initialised twice!");
-            _instance = new AssetLoader();
-            _instance._engine = gameEngine;
+            LoadQueue = new AssetLoader {_engine = gameEngine};
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿#region Using Statements
+
 using System;
 using System.Collections.Generic;
 using DropGrid.Client.Asset;
+using DropGrid.Client.Graphics;
 using DropGrid.Client.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,32 +14,40 @@ using Microsoft.Xna.Framework.Input;
 namespace DropGrid.Client
 {
     /// <summary>
-    /// This is the main client engine code. 
+    /// This is the main client engine. 
     /// It is responsible for initializing, drawing and updating the game state.
     /// </summary>
     public class GameEngine : Game
     {
         // The enlargement factor for game art
-        public static readonly int GRAPHICS_SCALE = 3;
+        public const int GraphicsScale = 3;
 
         // For drawing objects.
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _deviceManager;
         private SpriteBatch _spriteBatch;
-        
+        public GraphicsRenderer Renderer { get; private set; }
+
         // For game state management.
-        private Dictionary<StateId, GameState> _gameStates;
-        private GameState _currentState;
-        
+        private readonly Dictionary<StateId, EngineState> _gameStates;
+        private EngineState _currentState;
+        public bool DebugMode { get; internal set; }
+
         /// <summary>
         /// Sets up internal objects to manage the game loop.
         /// Do not load game assets here.
         /// </summary>
         public GameEngine()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _deviceManager = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = 1280, 
+                PreferredBackBufferHeight = 720
+            };
+            _deviceManager.ApplyChanges();
+
             Content.RootDirectory = "Content";
             AssetLoader.Initialise(this);
-            _gameStates = new Dictionary<StateId, GameState>();
+            _gameStates = new Dictionary<StateId, EngineState>();
         }
 
         /// <summary>
@@ -53,7 +63,10 @@ namespace DropGrid.Client
             RegisterGameState(new LoadingState());
             RegisterGameState(new MenuState());
             RegisterGameState(new GameplayState());
-
+            
+            InputHandler.AddKeyboardListener(new EngineKeyboardListener(this));
+            InputHandler.AddMouseListener(new EngineMouseListener(this));
+            
             base.Initialize();
         }
 
@@ -64,6 +77,7 @@ namespace DropGrid.Client
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Renderer = new GraphicsRenderer(_deviceManager.GraphicsDevice, _spriteBatch, ViewPerspectives.ISOMETRIC);
             EnterState(StateId.Initialise);
         }
 
@@ -88,6 +102,7 @@ namespace DropGrid.Client
             else
                 _currentState.Initialise(this);
             base.Update(gameTime);
+            InputHandler.Update();
         }
 
         /// <summary>
@@ -97,8 +112,9 @@ namespace DropGrid.Client
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+            Renderer.LastUpdateTime = gameTime;
             if (_currentState.Initialised)
-                _currentState.Draw(this, _spriteBatch, gameTime);
+                _currentState.Render(this, Renderer, gameTime);
             base.Draw(gameTime);
         }
 
@@ -106,7 +122,7 @@ namespace DropGrid.Client
         /// Adds a game state instance to the game state map.
         /// </summary>
         /// <param name="state">The state instance.</param>
-        private void RegisterGameState(GameState state)
+        private void RegisterGameState(EngineState state)
         {
             if (state == null)
                 throw new ArgumentException("Cannot register a null state!");
@@ -120,13 +136,73 @@ namespace DropGrid.Client
         /// <param name="id">StateId of the new state.</param>
         public void EnterState(StateId id)
         {
-            GameState state = _gameStates[id];
+            EngineState state = _gameStates[id];
             if (state == null)
-                throw new InvalidOperationException("Attempting to switch to state id '" + state.ToString() + "' which has a null state instance!");
+                throw new InvalidOperationException("Attempting to switch to state id '" + id + "' which has a null state instance!");
             if (_currentState != null)
                 _currentState.OnExit();
             _currentState = state;
             _currentState.OnEnter();
+        }
+    }
+
+    internal sealed class EngineKeyboardListener : IKeyboardListener
+    {
+        private readonly GameEngine _engine;
+
+        public EngineKeyboardListener(GameEngine engine)
+        {
+            _engine = engine;
+        }
+        
+        public void KeyPressed(Keys key)
+        {
+            if (key == Keys.F2)
+            {
+                _engine.DebugMode = !_engine.DebugMode;
+            }
+        }
+
+        public void KeyHeldDown(Keys key)
+        {
+
+        }
+
+        public void KeyReleased(Keys key)
+        {
+
+        }
+
+        public bool CanDispose()
+        {
+            return false;
+        }
+    }
+
+    internal sealed class EngineMouseListener : IMouseListener
+    {
+        private readonly GameEngine _engine;
+
+        public EngineMouseListener(GameEngine engine)
+        {
+            _engine = engine;
+        }
+        
+        public void ButtonPressed(MouseButtonType mouseButtonType)
+        {
+        }
+
+        public void ButtonHeldDown(MouseButtonType mouseButtonType)
+        {
+        }
+
+        public void ButtonReleased(MouseButtonType mouseButtonType)
+        {
+        }
+
+        public bool CanDispose()
+        {
+            return false;
         }
     }
 }

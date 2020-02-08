@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Content;
-using System;
 
 namespace DropGrid.Client.Asset
 {
@@ -8,23 +7,22 @@ namespace DropGrid.Client.Asset
     /// 
     /// Each Asset is a wrapper around a specific data type. This type of implementation
     /// allows deferred / lazy resource loading.
-    /// 
-    /// TODO: Generify this class. Casting Objects is a bit disgusting.
     /// </summary>
     public abstract class Asset
     {
         public string Identifier { get; }
 
-        public Asset(string identifier)
+        protected Asset(string identifier)
         {
             Identifier = identifier;
-            if (identifier != null)
+            if (identifier != null) { 
                 AssetRegistry.RegisterAsset(this);
+            }
         }
 
         public abstract Asset Load(ContentManager contentManager);
 
-        public abstract Object GetData();
+        public abstract object GetData();
 
         public bool IsLoaded() => GetData() != null;
     }

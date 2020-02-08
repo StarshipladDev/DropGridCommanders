@@ -1,62 +1,56 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using DropGrid.Client.Asset;
+using DropGrid.Client.Graphics;
+using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DropGrid.Client.State
 {
-    /// <summary>
-    /// The initialisation state handles deferred content loading. It is too costly to load ALL game assets into memory during startup.
-    /// When new unloaded assets have been requested, we switch to this state and load them.
-    /// </summary>
-    class LoadingState : GameState
-    {
-        private bool loadedEverything = false;
-        private int totalAssetsToLoad;
-        private int currentlyLoaded;
 
-        public LoadingState()
-        {
-            AssetLoader.LoadQueue.Add(AssetRegistry.TILESET);
-        }
+    sealed class LoadingState : EngineState
+    {
+        private bool _loadedEverything;
+        private int _totalAssetsToLoad;
+        private int _currentlyLoaded;
 
         public override StateId GetId() => StateId.Initialise;
-
-        public override void Initialise(GameEngine engine)
+        
+        public override void Render(GameEngine engine, GraphicsRenderer renderer, GameTime gameTime)
         {
-            base.Initialise(engine);
+
         }
 
-        public override void Draw(GameEngine engine, SpriteBatch spriteBatch, GameTime gameTime)
-        {
-            // TODO: Bit font status rendering...
-        }
-
-        private bool firstRun = true;
+        private bool _firstRun = true;
         public override void Update(GameEngine engine, GameTime gameTime)
         {
-            if (firstRun)
+            if (_firstRun)
             {
-                totalAssetsToLoad = AssetLoader.LoadQueue.GetSize();
-                currentlyLoaded = 0;
-                firstRun = false;
+                List<Asset.Asset> assetsToLoad = AssetRegistry.GetAssetsToLoad();
+                AssetLoader.LoadQueue.AddAll(assetsToLoad);
+
+                _totalAssetsToLoad = AssetLoader.LoadQueue.GetSize();
+                _currentlyLoaded = 0;
+                _loadedEverything = _currentlyLoaded == _totalAssetsToLoad;
+                _firstRun = false;
             }
-            if (!loadedEverything)
+            if (!_loadedEverything)
             {
                 AssetLoader.LoadQueue.LoadNext();
-                currentlyLoaded++;
-                loadedEverything |= currentlyLoaded == totalAssetsToLoad;
+                _currentlyLoaded++;
+                _loadedEverything |= _currentlyLoaded == _totalAssetsToLoad;
             }
-            if (IsInitializationFinished())
-            {
-                engine.EnterState(StateId.Gameplay);
-                return;
-            }
+
+            if (!IsAssetLoaded()) return;
+            
+            MapTileTextures.Initialise();
+            PlayerUnitAssets.Initialise();
+
+            engine.EnterState(StateId.Gameplay);
         }
 
-        private bool IsInitializationFinished()
+        private bool IsAssetLoaded()
         {
-            return loadedEverything;
+            return _loadedEverything;
         }
     }
 }

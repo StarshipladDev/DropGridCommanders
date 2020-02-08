@@ -11,41 +11,61 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Asset.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\MapTileTextures.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\PlayerUnitAssets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientPlayerUnit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Spritesheet.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Asset\AssetRegistry.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)State\GameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\GameFont.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\EntityRenderers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InputHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)State\EngineState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\LoadingState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\GameplayState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\StateId.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\IMapViewPerspective.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\Camera.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\GameMapRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\TileRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Asset\AnimatedSprite.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\MapViewPerspectives.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\IsometricPerspective.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map\CartesianPerspective.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\IMapViewPerspective.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Camera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\SpriteAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\ViewPerspectives.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\IsometricPerspective.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\CartesianPerspective.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Asset\Assets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\EnvironmentRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\MapRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\MapTileRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\GraphicsRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\GameSessionRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientPlayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientGameEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientMap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientGameSession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Environment\ClientMapTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
     <Folder Include="$(MSBuildThisFileDirectory)Asset\" />
     <Folder Include="$(MSBuildThisFileDirectory)State\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Map\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Graphics\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Graphics\Renderer\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Environment\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Logic\" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Content\test.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\basic_ground_tiles.png" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\basic_ground_tiles.mgcontent" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgstats" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgcontent" />
     <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\test.mgcontent" />
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\test.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\basic_ground_tiles.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\font.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\tileset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\testEntity.png" />
   </ItemGroup>
 </Project>
