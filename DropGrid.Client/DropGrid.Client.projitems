@@ -18,6 +18,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Asset\Spritesheet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\GameFont.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Gui\AbstractComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Gui\ComponentState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Gui\IStateDependentListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Renderer\EntityRenderers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InputHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)State\EngineState.cs" />
