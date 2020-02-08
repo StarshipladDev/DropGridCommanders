@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using DropGrid.Client.Asset;
 using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
