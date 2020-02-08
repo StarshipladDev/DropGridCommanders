@@ -99,6 +99,12 @@
       <Kind>Static</Kind>
     </NativeReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DropGrid.Windows\DropGrid.Windows.csproj">
+      <Project>{16854144-1824-4046-858f-93977e9aabd2}</Project>
+      <Name>DropGrid.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
 </Project>

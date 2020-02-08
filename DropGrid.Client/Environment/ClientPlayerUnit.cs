@@ -1,10 +1,8 @@
 using System;
 using DropGrid.Client.Asset;
-using DropGrid.Client.Graphics;
 using DropGrid.Core.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-//using OpenTK;
 
 namespace DropGrid.Client.Environment
 {

@@ -11,6 +11,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DropGrid.Client", "DropGrid
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DropGrid.Core", "DropGrid.Core\DropGrid.Core.shproj", "{DC1E8C40-376B-484C-8956-3587FDA44C33}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropGrid.UnitTest", "DropGrid.UnitTest\DropGrid.UnitTest.csproj", "{B3F3F046-508A-474E-B7E5-01A745A26C8C}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DropGrid.Client\DropGrid.Client.projitems*{16854144-1824-4046-858f-93977e9aabd2}*SharedItemsImports = 4
@@ -39,6 +41,14 @@ Global
 		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Release|Any CPU.ActiveCfg = Release|x86
 		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Release|x86.ActiveCfg = Release|x86
 		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Release|x86.Build.0 = Release|x86
+		{B3F3F046-508A-474E-B7E5-01A745A26C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3F3F046-508A-474E-B7E5-01A745A26C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F3F046-508A-474E-B7E5-01A745A26C8C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B3F3F046-508A-474E-B7E5-01A745A26C8C}.Debug|x86.Build.0 = Debug|Any CPU
+		{B3F3F046-508A-474E-B7E5-01A745A26C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F3F046-508A-474E-B7E5-01A745A26C8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3F3F046-508A-474E-B7E5-01A745A26C8C}.Release|x86.ActiveCfg = Release|Any CPU
+		{B3F3F046-508A-474E-B7E5-01A745A26C8C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
