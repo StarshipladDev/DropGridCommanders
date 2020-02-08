@@ -14,19 +14,29 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DropGrid.Client\DropGrid.Client.projitems*{16854144-1824-4046-858f-93977e9aabd2}*SharedItemsImports = 4
+		DropGrid.Core\DropGrid.Core.projitems*{16854144-1824-4046-858f-93977e9aabd2}*SharedItemsImports = 4
+		DropGrid.Client\DropGrid.Client.projitems*{3a23aa06-840e-4419-9ca5-6ca6a633eb1f}*SharedItemsImports = 4
+		DropGrid.Core\DropGrid.Core.projitems*{3a23aa06-840e-4419-9ca5-6ca6a633eb1f}*SharedItemsImports = 4
 		DropGrid.Client\DropGrid.Client.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 		DropGrid.Core\DropGrid.Core.projitems*{dc1e8c40-376b-484c-8956-3587fda44c33}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16854144-1824-4046-858F-93977E9AABD2}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{16854144-1824-4046-858F-93977E9AABD2}.Debug|x86.ActiveCfg = Debug|x86
+		{16854144-1824-4046-858F-93977E9AABD2}.Debug|x86.Build.0 = Debug|x86
+		{16854144-1824-4046-858F-93977E9AABD2}.Release|Any CPU.ActiveCfg = Release|x86
 		{16854144-1824-4046-858F-93977E9AABD2}.Release|x86.ActiveCfg = Release|x86
 		{16854144-1824-4046-858F-93977E9AABD2}.Release|x86.Build.0 = Release|x86
+		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Debug|x86.ActiveCfg = Debug|x86
 		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Debug|x86.Build.0 = Debug|x86
+		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Release|Any CPU.ActiveCfg = Release|x86
 		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Release|x86.ActiveCfg = Release|x86
 		{3A23AA06-840E-4419-9CA5-6CA6A633EB1F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection

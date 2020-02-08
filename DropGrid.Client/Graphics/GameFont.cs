@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using DropGrid.Client.Asset;
+using JetBrains.Annotations;
 
 namespace DropGrid.Client.Graphics
 {
@@ -80,7 +81,7 @@ namespace DropGrid.Client.Graphics
 
         public int GetCharacterHeight() => _bitmapSource.CellHeight * GameEngine.GraphicsScale;
 
-        public int GetCharacterWidth(char character) => _spacing.CharacterWidth(character, _supportedChars.Contains(character));
+        public int GetCharacterWidth(char character) => _spacing.CharacterWidth(character, _supportedChars.Contains(char.ToString(character)));
 
         public Sprite GetTextureFor(char character)
         {
@@ -96,7 +97,7 @@ namespace DropGrid.Client.Graphics
             return _bitmapSource.GetSpriteAt(cellX, cellY);
         }
 
-        public bool IsCharacterSupported(char character) => _supportedChars.Contains(character);
+        public bool IsCharacterSupported(char character) => _supportedChars.Contains(char.ToString(character));
     }
     
     internal sealed class DefaultFontStyle : FontStyle

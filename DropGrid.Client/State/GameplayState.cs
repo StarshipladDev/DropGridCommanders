@@ -3,7 +3,6 @@ using DropGrid.Client.Environment;
 using DropGrid.Client.Graphics;
 using DropGrid.Client.Graphics.Renderer;
 using DropGrid.Core.Environment;
-using Metal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
