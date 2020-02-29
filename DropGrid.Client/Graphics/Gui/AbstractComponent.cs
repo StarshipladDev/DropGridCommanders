@@ -12,20 +12,6 @@ namespace DropGrid.Client.Graphics.Gui
         public int Width { get; internal set; }
         public int Height { get; internal set; }
         
-        public int PaddingUp { get; internal set; }
-        public int PaddingDown { get; internal set; }
-        public int PaddingLeft { get; internal set; }
-        public int PaddingRight { get; internal set; }
-        
-        public int MarginUp { get; internal set; }
-        public int MarginDown { get; internal set; }
-        public int MarginLeft { get; internal set; }
-        public int MarginRight { get; internal set; }
-
-        private Dimensions _preferredSize;
-        private Dimensions _minimumSize;
-        private Dimensions _maximumSize;
-        
         private ComponentState _state;
         private bool _enabled;
         private bool _visible;
@@ -78,33 +64,7 @@ namespace DropGrid.Client.Graphics.Gui
 
         [CanBeNull]
         public AbstractComponent GetParent() => _parent;
-
-        public void SetMargin(int margin) => SetMargin(margin, margin);
         
-        public void SetMargin(int upAndDown, int leftAndRight) =>
-            SetMargin(upAndDown, upAndDown, leftAndRight, leftAndRight);
-        
-        public void SetMargin(int up, int down, int left, int right)
-        {
-            MarginUp = up;
-            MarginDown = down;
-            MarginLeft = left;
-            MarginRight = right;
-        }
-
-        public void SetPadding(int padding) => SetPadding(padding, padding);
-
-        public void SetPadding(int upAndDown, int leftAndRight) =>
-            SetPadding(upAndDown, upAndDown, leftAndRight, leftAndRight);
-        
-        public void SetPadding(int up, int down, int left, int right)
-        {
-            PaddingUp = PaddingUp;
-            PaddingDown = PaddingDown;
-            PaddingLeft = PaddingLeft;
-            PaddingRight = PaddingRight;
-        }
-
         public bool IsVisible() => _visible;
 
         public void SetVisible(bool flag)
@@ -126,23 +86,6 @@ namespace DropGrid.Client.Graphics.Gui
 
         public bool IsDisposed() => _disposed;
 
-        public void SetPreferredWidth(int width) => SetPreferredSize(width, _preferredSize.Height);
-        public void SetPreferredHeight(int height) => SetPreferredSize(_preferredSize.Width, height);
-        public void SetPreferredSize(int width, int height) => _preferredSize = new Dimensions(width, height);
-        public Dimensions GetPreferredSize() => _preferredSize;
-
-        public void SetMinimumWidth(int width) => SetMinimumSize(width, _minimumSize.Height);
-        public void SetMinimumHeight(int height) => SetMinimumSize(_minimumSize.Width, height);
-        public void SetMinimumSize(int width, int height) => _minimumSize = new Dimensions(width, height);
-
-        public Dimensions GetMinimumSize() => _minimumSize;
-
-        public void SetMaximumWidth(int width) => SetMaximumSize(width, _maximumSize.Height);
-        public void SetMaximumHeight(int height) => SetMaximumSize(_maximumSize.Width, height);
-
-        public void SetMaximumSize(int width, int height) => _maximumSize = new Dimensions(width, height);
-        public Dimensions GetMaximumSize() => _maximumSize;
-        
         protected void SetComponentState(ComponentState state)
         {
             if (state == ComponentState.Disabled)

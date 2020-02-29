@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using DropGrid.Client.Asset;
 using DropGrid.Client.Graphics;
+using DropGrid.Client.Graphics.Gui;
 using DropGrid.Client.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -101,6 +102,7 @@ namespace DropGrid.Client
                 _currentState.Update(this, gameTime);
             else
                 _currentState.Initialise(this);
+            GuiManager.Render(this, Renderer, gameTime);
             base.Update(gameTime);
             InputHandler.Update();
         }
@@ -115,6 +117,8 @@ namespace DropGrid.Client
             Renderer.LastUpdateTime = gameTime;
             if (_currentState.Initialised)
                 _currentState.Render(this, Renderer, gameTime);
+            GuiManager.Render(this, Renderer, gameTime);
+            
             base.Draw(gameTime);
         }
 
