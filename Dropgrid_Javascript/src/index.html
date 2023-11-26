@@ -1,0 +1,147 @@
+<html>
+
+<head>
+    <style>
+        .content-layer {
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #666666;
+            display: inline-block;
+            position: relative;
+        }
+
+        span {
+            display: block;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        #svgClear {
+            position: absolute;
+            left: calc(50% - 300px);
+        }
+
+        .image {
+            background-size: cover;
+            width: 50%;
+            height: 50%;
+        }
+
+        .image1 {
+            background-image: url("BadPic.png");
+        }
+
+        .image2 {
+            background-image: url("GoodPic.png");
+        }
+
+        .center-text {
+            text-anchor: middle;
+        }
+
+        /* Map Stuff */
+
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            position: absolute;
+            height: 50%;
+            width:50%;
+            margin-left: 25%;
+        }
+        #grid {
+            
+            position: absolute;
+            height: 50%;
+            width:50%;
+            margin-left: 25%;
+        }
+        .strong-line {
+            stroke-width: 5px;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-layer">
+
+        <body>
+            <div id = "map"></div>
+            <svg id = "grid">
+                    <g id = "horizontal">
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "0%" x2 = "0%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "10%" y1 = "0%" x2 = "10%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "20%" y1 = "0%" x2 = "20%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "30%" y1 = "0%" x2 = "30%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "40%" y1 = "0%" x2 = "40%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "50%" y1 = "0%" x2 = "50%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "60%" y1 = "0%" x2 = "60%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "70%" y1 = "0%" x2 = "70%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "80%" y1 = "0%" x2 = "80%" y2="100%" />
+                        <line class="strong-line" stroke = "black" x1 = "90%" y1 = "0%" x2 = "90%" y2="100%" />
+
+                    </g>
+                    <g id = "vertical">
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "0%" x2 = "100%" y2="0%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "10%" x2 = "100%" y2="10%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "20%" x2 = "100%" y2="20%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "30%" x2 = "100%" y2="30%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "40%" x2 = "100%" y2="40%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "50%" x2 = "100%" y2="50%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "60%" x2 = "100%" y2="60%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "70%" x2 = "100%" y2="70%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "80%" x2 = "100%" y2="80%" />
+                        <line class="strong-line" stroke = "black" x1 = "0%" y1 = "90%" x2 = "100%" y2="90%" />
+
+                    </g>
+            </svg>
+        </body>
+
+    </div>
+
+    <div style="text-align:center; width:100%; height:100%;">
+        <div style="padding-top:5%;background-color:white;width:100%; text-align:center;">
+            Initial Design Image:<br>
+        </div>
+        <img src="Design.png">
+        <div>
+            <h1> Explanation</h1>
+            <span> The idea of interacting with a google map used as a background allows a lot of utility. </span>
+            <span> Today's design is based around this conecpt, trying to mimic some of the functionality of google's inbuilt map drawing APIs </span>
+
+        </div>
+    </div>
+
+
+    <script>
+        var mapOptions = {
+            zoom: 13,
+            center: { lat: -34.397, lng: 150.644 },
+            mapTypeId: 'satellite',
+
+            scaleControl: true,
+        };
+
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAajYfAvnI1N_8CkYZl99j-7iAXcxNSkhY&callback=initMap"
+        async defer>
+        </script>
+</body>
+
+</html>
