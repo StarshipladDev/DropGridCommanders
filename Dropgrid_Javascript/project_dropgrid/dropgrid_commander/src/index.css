@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.grid-svg {
+  position: absolute;
+  width:50vw;
+  height:50vw;
+  left: 25%;
+}
+
+.swap-button{
+  
+  position: absolute;
+  left: calc(25% + 50vw);
+}
+
+.no-pointer {
+  pointer-events:none;
+}
