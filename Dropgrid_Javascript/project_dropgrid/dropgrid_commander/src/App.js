@@ -29,7 +29,10 @@ function createGrids(numberOfGrids) {
   return returnedGridArray;
 }
 
-
+function renderSoldier(widthOfChart,heightOfChart,xcoord,ycoord){
+  const cellX = widthOfChart/xcoord;
+  const cellY = heightOfChart/ycoord;
+}
 function App() {
   const mapLines = createGrids(20);
   const [disabledState, setDisabledState] = useState(true);
